@@ -1,0 +1,13 @@
+#!/usr/bin/zsh
+
+#mem=$(free -m | grep 'Mem:' | awk '{printf "%.1f/%.1f G", $2/1000, $3/1000}')
+mem=$(free -m | grep 'Mem:' | awk '{printf "%.1f G", $3/1000}')
+
+echo -n " :$mem"
+
+case $BLOCK_BUTTON in
+	1) "$TERMINAL" -e sudo htop ;;
+	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
+esac
+
+

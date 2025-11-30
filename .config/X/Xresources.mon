@@ -1,0 +1,67 @@
+dwm.font0: terminus:size=14:style=Bold
+dwm.font1: terminus:size=14:style=Bold
+dwm.dmenufont: terminus:size=14:style=Bold
+dmenu.font: terminus:size=14:style=Bold
+st.font: terminus:size=14
+st.font2: Noto Color Emoji:size=12
+
+dwm.normfgcolor:   #ffffff
+dwm.normbgcolor:   #000000
+dwm.normbordercolor: #263238
+dwm.selfgcolor: #000000
+dwm.selbgcolor:     #bcbcbc
+dwm.selbordercolor: #A96C8A
+dwm.baralpha: 0
+dwm.borderalpha: 1000
+
+dmenu.normfgcolor: #ffffff
+dmenu.normbgcolor: #000000
+dmenu.selfgcolor: #000000
+dmenu.selbgcolor: #6CA98A
+dmenu.bordercolor: #A96C8A
+dmenu.alphanorm: 230
+dmenu.alphasel: 230
+dmenu.alphaout: 230
+dmenu.lines: 15
+
+st.alpha : 1
+
+slock.draw_on_two: 1
+
+Xcursor.size: 10
+
+*.foreground:   #EEEEEE
+*.background:   #000000
+*.cursorColor:  #EEEEEE
+
+! black
+*.color0:       #000000
+*.color8:       #262626
+
+! red
+*.color1:       #ed0b0b
+*.color9:       #b55454
+
+! green
+*.color2:       #40a62f
+*.color10:      #78a670
+
+! yellow
+*.color3:       #f2e635
+*.color11:      #faf380
+
+! blue
+*.color4:       #327bd1
+*.color12:      #68a7d4
+
+! magenta
+*.color5:       #b30ad0
+*.color13:      #c583d0
+
+! cyan
+*.color6:       #3975b8
+*.color14:      #3975b8
+
+! white
+*.color7:       #EEEEEE
+*.color15:      #EEEEEE

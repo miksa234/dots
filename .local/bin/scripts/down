@@ -1,0 +1,4 @@
+#!/usr/bin/zsh
+
+pgrep $1 | xargs kill -9
+
