@@ -9,15 +9,7 @@ function mulmon_activate() {
         edid_mulmon
         sleep 1
     done
-
-    xset r rate 300 50
-    xset mouse 1.8 0
-    setxkbmap -model p104 -layout us,de -option grp:shifts_toggle
-    dbus-update-activation-environment --systemd DBUS_SESSION_BUS_ADDRESS DISPLAY XAUTHORITY
-    xrdb $XDG_CONFIG_HOME/X/Xresources.mon
-    num=$(xinput | grep "Razer Razer DeathAdder Essential  " | head -1 | grep -oP "id=\K\d+")
-    xinput --set-prop $num 'libinput Accel Speed' -0.75
-
+    set_kb_mouse
     MONITOR_OUT=1
 }
 
