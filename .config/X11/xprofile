@@ -1,7 +1,5 @@
 #!/usr/bin/zsh
 
-
-
 if [[ -z "$DBUS_SESSION_BUS_ADDRESS" ]]; then
     export $(dbus-launch --exit-with-x11)
 fi

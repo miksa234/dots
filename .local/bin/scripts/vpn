@@ -15,29 +15,29 @@ router() {
     notify-send "VPN" "wg0-router started"
 }
 
-uni() {
-   f5fpc \
-       -s\
-       -t vpn.univie.ac.at\
-       -d /etc/ssl/certs/\
-       -u milutinp00@$(pass otp uni-otp)\
-       -p $(pass uni-pass)
-    notify-send "VPN" "F5FPC-uni started"
-}
-
-unifull() {
-   f5fpc -s\
-       -t vpn.univie.ac.at:8443 \
-       -d /etc/ssl/certs/\
-       -u milutinp00@$(pass otp uni-otp)\
-       -p $(pass uni-pass)
-    notify-send "VPN" "F5FPC-unifull started"
-}
-
-
-info() {
-    f5fpc --info
-}
+#uni() {
+#   f5fpc \
+#       -s\
+#       -t vpn.univie.ac.at\
+#       -d /etc/ssl/certs/\
+#       -u milutinp00@$(pass otp uni-otp)\
+#       -p $(pass uni-pass)
+#    notify-send "VPN" "F5FPC-uni started"
+#}
+#
+#unifull() {
+#   f5fpc -s\
+#       -t vpn.univie.ac.at:8443 \
+#       -d /etc/ssl/certs/\
+#       -u milutinp00@$(pass otp uni-otp)\
+#       -p $(pass uni-pass)
+#    notify-send "VPN" "F5FPC-unifull started"
+#}
+#
+#
+#info() {
+#    f5fpc --info
+#}
 
 stop() {
     running_wg0=$(sudo wg show | grep -Eo "wg0-(.*)")
@@ -46,11 +46,11 @@ stop() {
         notify-send "VPN" "$running_wg0 stopped"
     fi
     if
-    running_f5fpc=$(f5fpc --info | grep -Eo "session established")
-    if [[ -n $running_f5fpc ]]; then
-        f5fpc --stop
-        notify-send "VPN" "F5FPC stopped"
-    fi
+#    running_f5fpc=$(f5fpc --info | grep -Eo "session established")
+#    if [[ -n $running_f5fpc ]]; then
+#        f5fpc --stop
+#        notify-send "VPN" "F5FPC stopped"
+#    fi
     pkill -RTMIN+6 dwmblocks
 }
 
