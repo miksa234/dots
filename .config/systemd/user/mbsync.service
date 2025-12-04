@@ -8,3 +8,6 @@ Type=oneshot
 ExecStart=/usr/bin/zsh -c 'mbsync -c .config/isync/mbsyncrc -a -q'
 StandardOutput=syslog
 StandardError=syslog
+
+[Install]
+WantedBy=mbsync.timer
