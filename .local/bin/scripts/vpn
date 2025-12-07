@@ -45,7 +45,6 @@ stop() {
         sudo wg-quick down $running_wg0
         notify-send "VPN" "$running_wg0 stopped"
     fi
-    if
 #    running_f5fpc=$(f5fpc --info | grep -Eo "session established")
 #    if [[ -n $running_f5fpc ]]; then
 #        f5fpc --stop

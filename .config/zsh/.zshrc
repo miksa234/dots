@@ -33,6 +33,3 @@ compinit
 source "${XDG_CONFIG_HOME:-$HOME/.config}/shell/vimode"
 source "${XDG_CONFIG_HOME:-$HOME/.config}/shell/aliases"
 source "${XDG_CONFIG_HOME:-$HOME/.config}/shell/colors"
-
-# bun completions
-[ -s "/home/mika/.bun/_bun" ] && source "/home/mika/.bun/_bun"
