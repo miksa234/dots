@@ -1,0 +1,25 @@
+#!/bin/sh
+
+#EMOJI=$(cat $XDG_DATA_HOME/status/sink.info)
+volume=$(pamixer --get-volume-human | sed 's/\%//')
+emoji=""
+
+if  [[ "0" -lt "$volume" ]] && [[ "$volume" -le "20" ]]; then
+    emoji=""
+elif  [[ "20" -lt "$volume" ]] && [[ "$volume" -le "80" ]]; then
+    emoji=""
+elif  [[ "80" -lt "$volume" ]] && [[ "$volume" -le "100" ]]; then
+    emoji=""
+elif [[ $volume == "muted" ]]; then
+    emoji=""
+fi
+
+echo "$emoji"
+
+case $BLOCK_BUTTON in
+    1) notify-send "Volume:" "$volume%" ;;
+	2) setsid -f pavucontrol ;;
+    4) pkill -RTMIN+5 dwmblocks ; pactl set-sink-volume @DEFAULT_SINK@ -5% ;;
+    5) pkill -RTMIN+5 dwmblocks ; pactl set-sink-volume @DEFAULT_SINK@ +5% ;;
+	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
+esac

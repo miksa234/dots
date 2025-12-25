@@ -1,0 +1,27 @@
+#!/usr/bin/env zsh
+
+
+source /usr/share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh 2>/dev/null
+source /usr/share/zsh/plugins/zsh-system-clipboard/zsh-system-clipboard.zsh 2>/dev/null
+source $XDG_CONFIG_HOME/nix-zsh-plugins.zsh 2>/dev/null
+
+LS_COLORS=$LS_COLORS:'di=1;36:'
+export LS_COLORS
+
+FAST_HIGHLIGHT_STYLES[alias]=fg=none
+FAST_HIGHLIGHT_STYLES[default]=fg=none
+FAST_HIGHLIGHT_STYLES[builtin]=fg=none
+FAST_HIGHLIGHT_STYLES[precommand]=fg=none
+FAST_HIGHLIGHT_STYLES[command]=fg=none
+FAST_HIGHLIGHT_STYLES[commandseparator]=none
+FAST_HIGHLIGHT_STYLES[unknown-token]=fg=red,bold
+FAST_HIGHLIGHT_STYLES[reserver-word]=fg=red,bold
+FAST_HIGHLIGHT_STYLES[assign]=none
+FAST_HIGHLIGHT_STYLES[history-expansion]=none
+FAST_HIGHLIGHT_STYLES[single-hyphen-option]=none
+FAST_HIGHLIGHT_STYLES[double-hyphen-option]=none
+FAST_HIGHLIGHT_STYLES[single-quoted-argument]=none
+FAST_HIGHLIGHT_STYLES[double-quoted-argument]=none
+FAST_HIGHLIGHT_STYLES[path]=none
+FAST_HIGHLIGHT_STYLES[path-to-dir]=none
+

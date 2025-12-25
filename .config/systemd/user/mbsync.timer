@@ -1,0 +1,13 @@
+[Unit]
+Description=Mailbox synchronization timer
+RefuseManualStop=no
+RefuseManualStart=no
+
+[Timer]
+Persistent=false
+OnBootSec=0.3m
+OnUnitActiveSec=0.5m
+Unit=mbsync.service
+
+[Install]
+WantedBy=default.target

@@ -1,0 +1,30 @@
+#!/bin/sh
+
+
+number_of_mails=$( (ls $XDG_DATA_HOME/mail/milutin@popovic.xyz/INBOX/new &\
+                    ls $XDG_DATA_HOME/mail/a11807930@unet.univie.ac.at/INBOX/new &\
+                    ls $XDG_DATA_HOME/mail/mika@popovic.xyz/INBOX/new) | wc -l)
+
+last_new=$(cat $XDG_CACHE_HOME/status/mail.new)
+
+
+if [[ $number_of_mails -gt $last_new ]]
+then
+    notify-send "New Email" "$number_of_mails new messages"
+    echo $number_of_mails > $XDG_CACHE_HOME/status/mail.new
+
+else
+    echo $number_of_mails > $XDG_CACHE_HOME/status/mail.new
+fi
+
+if [[ "number_of_mails" -gt "0" ]]
+then
+    echo ""
+fi
+
+case $BLOCK_BUTTON in
+	1) setsid -f "$TERMINAL" -e neomutt ;;
+	2) pkill -RTMIN+3 dwmblocks && setsid -f mbsync -a ;;
+	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
+esac
+

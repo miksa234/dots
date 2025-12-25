@@ -1,0 +1,59 @@
+#!/usr/bin/env python
+
+import re
+import subprocess
+
+M_R = "00ffffffffffff0009d1d5784554000034190103803c22782ea595a45852a0260d5054a56b80818081c08100a9c0b300d1c001010101023a801871382d40582c450056502100001e000000ff0053434630343130313031390a20000000fd00324c1e5310000a202020202020000000fc0042656e5120474c323736300a20016c020321c149901f05141304030201230907078301000067030c000000001ee2000f011d8018711c1620582c2500c48e2100009e0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000075"
+
+M_L = "00ffffffffffff0009d1d578455400000c180103803c22782ea595a45852a0260d5054a56b80818081c08100a9c0b300d1c001010101023a801871382d40582c450056502100001e000000ff0048334530343230333031390a20000000fd00324c1e5310000a202020202020000000fc0042656e5120474c323736300a2001ae020321c149901f05141304030201230907078301000067030c000000001ee2000f011d8018711c1620582c2500c48e2100009e0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000075"
+
+def get_port_edids():
+    ports = []
+
+    xrandr = subprocess.run(['xrandr', '--verbose'], stdout=subprocess.PIPE)
+    lines = xrandr.stdout.decode('utf-8').split('\n')
+
+    get_edid = False
+    edid = ""
+    for line in lines:
+        if " connected " in line:
+            port = line.split(' ')[0]
+        if "GAMMA_LUT_SIZE" in line:
+            if get_edid == True:
+                ports.append([port , edid.replace('\t', '')])
+                edid = ""
+            get_edid = False
+        if get_edid:
+            edid += line
+        if "EDID" in line:
+            get_edid = True
+    return ports
+
+
+def main():
+    ports = get_port_edids()
+
+    left_port = None
+    right_port = None
+
+    for port in ports:
+        if port[1] == M_L:
+            left_port = port[0]
+        if port[1] == M_R:
+            right_port = port[0]
+
+    if left_port is not None and right_port is not None:
+        subprocess.run([
+            'xrandr',
+            '--output',
+            'eDP',
+            '--off',
+            '--output',
+            right_port,
+            '--right-of',
+            left_port
+        ], stdout=subprocess.PIPE)
+
+
+if __name__ == "__main__":
+    main()

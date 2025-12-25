@@ -1,0 +1,134 @@
+IMAPStore milutin@popovic.xyz-remote
+Host mail.popovic.xyz
+Port 993
+User milutin
+PassCmd "pass mw-milutin@popovic.xyz"
+AuthMechs LOGIN
+# SSLType IMAPS
+TLSType IMAPS
+CertificateFile /etc/ssl/certs/ca-certificates.crt
+
+MaildirStore milutin@popovic.xyz-local
+Subfolders Verbatim
+Path /home/mika/.local/share/mail/milutin@popovic.xyz/
+Inbox /home/mika/.local/share/mail/milutin@popovic.xyz/INBOX
+Flatten .
+
+Channel milutin@popovic.xyz
+Expunge Both
+Far :milutin@popovic.xyz-remote:
+Near :milutin@popovic.xyz-local:
+Patterns * !"[Gmail]/All Mail"
+Create Both
+SyncState *
+MaxMessages 0
+ExpireUnread no
+# End profile
+
+IMAPStore mika@popovic.xyz-remote
+Host mail.popovic.xyz
+Port 993
+User mika
+PassCmd "pass mw-mika@popovic.xyz"
+AuthMechs LOGIN
+# SSLType IMAPS
+TLSType IMAPS
+CertificateFile /etc/ssl/certs/ca-certificates.crt
+
+MaildirStore mika@popovic.xyz-local
+Subfolders Verbatim
+Path /home/mika/.local/share/mail/mika@popovic.xyz/
+Inbox /home/mika/.local/share/mail/mika@popovic.xyz/INBOX
+Flatten .
+
+Channel mika@popovic.xyz
+Expunge Both
+Far :mika@popovic.xyz-remote:
+Near :mika@popovic.xyz-local:
+Patterns * !"[Gmail]/All Mail"
+Create Both
+SyncState *
+MaxMessages 0
+ExpireUnread no
+# End profile
+
+IMAPStore milutin@ponnect.rs-remote
+Host mail.ponnect.rs
+Port 993
+User milutin
+PassCmd "pass milutin@ponnect"
+AuthMechs LOGIN
+# SSLType IMAPS
+TLSType IMAPS
+CertificateFile /etc/ssl/certs/ca-certificates.crt
+
+MaildirStore milutin@ponnect.rs-local
+Subfolders Verbatim
+Path /home/mika/.local/share/mail/milutin@ponnect.rs/
+Inbox /home/mika/.local/share/mail/milutin@ponnect.rs/INBOX
+Flatten .
+
+Channel milutin@ponnect.rs
+Expunge Both
+Far :milutin@ponnect.rs-remote:
+Near :milutin@ponnect.rs-local:
+Patterns * !"[Gmail]/All Mail"
+Create Both
+SyncState *
+MaxMessages 0
+ExpireUnread no
+# End profile
+
+IMAPStore info@ponnect.rs-remote
+Host mail.ponnect.rs
+Port 993
+User info
+PassCmd "pass info@ponnect"
+AuthMechs LOGIN
+# SSLType IMAPS
+TLSType IMAPS
+CertificateFile /etc/ssl/certs/ca-certificates.crt
+
+MaildirStore info@ponnect.rs-local
+Subfolders Verbatim
+Path /home/mika/.local/share/mail/info@ponnect.rs/
+Inbox /home/mika/.local/share/mail/info@ponnect.rs/INBOX
+Flatten .
+
+Channel info@ponnect.rs
+Expunge Both
+Far :info@ponnect.rs-remote:
+Near :info@ponnect.rs-local:
+Patterns * !"[Gmail]/All Mail"
+Create Both
+SyncState *
+MaxMessages 0
+ExpireUnread no
+# End profile
+
+#IMAPStore a11807930@unet.univie.ac.at-remote
+#Host imap.univie.ac.at
+#Port 993
+#User milutinp00
+#PassCmd "pass mw-a11807930@unet.univie.ac.at"
+#AuthMechs LOGIN
+## SSLType IMAPS
+#TLSType IMAPS
+#CertificateFile /etc/ssl/certs/ca-certificates.crt
+#
+#MaildirStore a11807930@unet.univie.ac.at-local
+#Subfolders Verbatim
+#Path /home/mika/.local/share/mail/a11807930@unet.univie.ac.at/
+#Inbox /home/mika/.local/share/mail/a11807930@unet.univie.ac.at/INBOX
+#Flatten .
+#
+#Channel a11807930@unet.univie.ac.at
+#Expunge Both
+#Far :a11807930@unet.univie.ac.at-remote:
+#Near :a11807930@unet.univie.ac.at-local:
+#Patterns * !"[Gmail]/All Mail"
+#Create Both
+#SyncState *
+#MaxMessages 0
+#ExpireUnread no
+## End profile

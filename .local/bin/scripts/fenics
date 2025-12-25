@@ -1,0 +1,39 @@
+#!/usr/bin/env zsh
+
+
+py() {
+	docker volume create --name instant-cache > /dev/null 2>&1
+	docker run --rm \
+				-v instant-cache:/home/fenics/.instant \
+				-v $(pwd):/home/fenics/shared \
+				-w /home/fenics/shared quay.io/fenicsproject/stable:current "python3 $1"
+}
+
+ipy() {
+	docker run --name notebook \
+				-w /home/fenics \
+				-v $(pwd):/home/fenics/shared \
+				-d -p 127.0.0.1:8888:8888 \
+				quay.io/fenicsproject/stable:current \
+				'cd shared && jupyter-notebook --ip=0.0.0.0' &&\
+	sleep 3 &&\
+
+	token=$(docker logs notebook 2>&1 | grep -o "token=[a-z0-9]*" | sed -n 1p) &&\
+	brave http://0.0.0.0:8888/\?$token # &&\
+#	docker stop notebook && docker rm notebook
+}
+
+rm-ipy() {
+	docker stop notebook && docker rm notebook
+}
+
+convert() {
+	docker volume create --name instant-cache > /dev/null 2>&1
+	docker run --rm \
+				-v instant-cache:/home/fenics/.instant \
+				-v $(pwd):/home/fenics/shared \
+				-w /home/fenics/shared quay.io/fenicsproject/stable:current "dolfin-convert $1 $2"
+}
+
+
+"$@"

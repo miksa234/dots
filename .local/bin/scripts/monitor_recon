@@ -1,0 +1,36 @@
+#!/usr/bin/env zsh
+
+function mulmon_activate() {
+    sleep 5
+    xrandr --auto
+    sleep 1
+    for int i in {1..5}; do
+        sleep 1
+        edid_mulmon
+        sleep 1
+    done
+    set_kb_mouse
+    MONITOR_OUT=1
+}
+
+function mulmon_deactivate() {
+    xrandr --auto
+    xrdb $XDG_CONFIG_HOME/X/Xresources
+    MONITOR_OUT=0
+}
+
+function active_connection() {
+    (( $(xrandr | grep " connected "| wc -l) == 3 ))
+}
+
+while true; do
+    if active_connection && [[ $MONITOR_OUT -eq 0 ]]; then
+        mulmon_activate
+    fi
+
+    if ! active_connection && [[ $MONITOR_OUT -eq 1 ]]; then
+        mulmon_deactivate
+    fi
+
+    sleep 2
+done

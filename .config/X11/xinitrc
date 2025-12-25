@@ -1,0 +1,8 @@
+#!/bin/sh
+
+source "${XDG_CONFIG_HOME:-$HOME/.config}/X11/xprofile" &
+
+while true; do
+    ssh-agent dwm > /dev/null 2>&1
+done
+

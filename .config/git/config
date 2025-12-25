@@ -1,0 +1,5 @@
+[user]
+	email = milutin@popovic.xyz
+	name = Milutin Popovic
+[init]
+	defaultBranch = main

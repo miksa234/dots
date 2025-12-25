@@ -1,0 +1,35 @@
+#!/bin/sh
+
+if [[ -n $(systemctl status -q bluetooth.service | grep -e "Active.*running") ]]; then
+    emoji="$(dmenu-bluetooth --status | awk '{print $1}')"
+
+    if [[ $emoji == "" ]]; then
+        capacity=$(upower --dump | awk '/headset/' RS="\n\n" ORS="" | grep percentage | awk -v N=2 '{printf $N}' | sed 's/\%//')
+        if  [[ "0" -lt "$capacity" ]] && [[ "$capacity" -le "20" ]]; then
+            bat=""
+        elif  [[ "20" -lt "$capacity" ]] && [[ "$capacity" -le "40" ]]; then
+            bat=""
+        elif  [[ "40" -lt "$capacity" ]] && [[ "$capacity" -le "60" ]]; then
+            bat=""
+        elif  [[ "60" -lt "$capacity" ]] && [[ "$capacity" -le "80" ]]; then
+            bat=""
+        elif [[ "80" -lt "$capacity" ]] && [[ "$capacity" -le "100" ]]; then
+            bat=""
+        fi
+
+        if [[ $capacity == "" ]]; then
+            echo "$emoji"
+        else
+            echo "$emoji $bat"
+        fi
+    else
+        echo "$emoji"
+    fi
+
+    case $BLOCK_BUTTON in
+        1) notify-send "$capacity";;
+        2) dmenu-bluetooth;;
+        6) "$TERMINAL" -e "$EDITOR" "$0" ;;
+    esac
+
+fi

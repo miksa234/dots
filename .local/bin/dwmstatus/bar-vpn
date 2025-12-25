@@ -1,0 +1,15 @@
+#!/bin/sh
+
+output=""
+status_file=$XDG_CACHE_HOME/status/vpn_tz
+
+if [[ -n $(sudo wg show | grep -Eo "wg0-(.*)") ]]; then
+    curl --fail -s https://ipapi.co/timezone > $status_file
+    output=""
+else
+    echo > $status_file
+fi
+
+if [[ $output != "" ]]; then
+    echo $output
+fi

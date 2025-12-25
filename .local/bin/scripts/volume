@@ -1,0 +1,19 @@
+#!/bin/sh
+
+up () {
+    cur_vol=$(pamixer --get-volume)
+    if (( cur_vol+$1 <= 100 )); then
+        pactl -- set-sink-volume @DEFAULT_SINK@ $(( cur_vol+$1 ))%;
+    else
+        pactl -- set-sink-volume @DEFAULT_SINK@ 100%;
+    fi
+
+    return 1;
+
+}
+
+down () {
+    pactl -- set-sink-volume @DEFAULT_SINK@ -$1%
+}
+
+"$@"

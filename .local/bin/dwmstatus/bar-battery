@@ -1,0 +1,31 @@
+#!/bin/sh
+[[ ! -e /sys/class/power_supply/BAT1 ]] && exit 1
+
+capacity=$(cat /sys/class/power_supply/BAT1/capacity)
+bat=$(cat /sys/class/power_supply/ACAD/online)
+
+if  [[ "0" -lt "$capacity" ]] && [[ "$capacity" -le "20" ]]; then
+    emoji=""
+elif  [[ "20" -lt "$capacity" ]] && [[ "$capacity" -le "40" ]]; then
+    emoji=""
+elif  [[ "40" -lt "$capacity" ]] && [[ "$capacity" -le "60" ]]; then
+    emoji=""
+elif  [[ "60" -lt "$capacity" ]] && [[ "$capacity" -le "80" ]]; then
+    emoji=""
+elif [[ "80" -lt "$capacity" ]] && [[ "$capacity" -le "100" ]]; then
+    emoji=""
+fi
+
+
+if [[ "$bat" = "1" ]]; then
+    emoji=""
+fi
+
+echo "$emoji"
+
+case "$BLOCK_BUTTON" in
+    1) notify-send "$capacity%" "$(acpi -b | sed 's/Battery 1: //')";;
+    4) sudo xbacklight -inc 1 ;;
+	5) sudo xbacklight -dec 1 ;;
+	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
+esac

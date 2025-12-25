@@ -1,0 +1,15 @@
+#!/bin/sh
+
+usage=$(top -bn1 | grep "Cpu(s)" | sed "s/.*, *\([0-9.]*\)%* id.*/\1/" | awk '{printf "%1.0f%",100 - $1}')
+temp=$(sensors | grep -A 2 k10temp | grep Tctl | awk '{printf +$2.}' | xargs printf "%.f")
+
+echo -n "🧠 :$usage $temp°"
+
+case $BLOCK_BUTTON in
+	1) setsid "$TERMINAL" -e sudo htop ;;
+	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
+esac
+
+
+
+

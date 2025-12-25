@@ -1,0 +1,42 @@
+defaults
+auth	on
+tls	on
+tls_trust_file	/etc/ssl/certs/ca-certificates.crt
+logfile	~/.config/msmtp/msmtp.log
+
+account milutin@popovic.xyz
+host mail.popovic.xyz
+port 587
+from milutin@popovic.xyz
+user milutin
+passwordeval "pass mw-milutin@popovic.xyz"
+
+account mika@popovic.xyz
+host mail.popovic.xyz
+port 587
+from mika@popovic.xyz
+user mika
+passwordeval "pass mw-mika@popovic.xyz"
+
+account milutin@ponnect.rs
+host mail.ponnect.rs
+port 587
+from milutin@ponnect.rs
+user milutin
+passwordeval "pass milutin@ponnect"
+
+account info@ponnect.rs
+host mail.ponnect.rs
+port 587
+from info@ponnect.rs
+user info
+passwordeval "pass info@ponnect"
+
+
+#account a11807930@unet.univie.ac.at
+#host mail.univie.ac.at
+#port 465
+#from a11807930@unet.univie.ac.at
+#user milutinp00
+#passwordeval "pass mw-a11807930@unet.univie.ac.at"
+#tls_starttls off

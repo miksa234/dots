@@ -1,0 +1,4 @@
+#!/bin/sh
+
+WALLPAPER=$(find "${XDG_DATA_HOME}/wallpaper" -type f,l | sort -R | tail -1)
+feh --no-fehbg --bg-scale "${WALLPAPER}"

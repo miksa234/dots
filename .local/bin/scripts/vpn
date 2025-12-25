@@ -1,0 +1,66 @@
+#!/bin/sh
+
+server() {
+    nmcli connection up wg0-server && pkill -RTMIN+6 dwmblocks
+    notify-send "VPN" "wg0-server started"
+}
+
+router() {
+    nmcli connection up wg0-router && pkill -RTMIN+6 dwmblocks
+    notify-send "VPN" "wg0-router started"
+}
+
+ponnect() {
+    nmcli connection up wg0-ponnect && pkill -RTMIN+6 dwmblocks
+    notify-send "VPN" "wg0-ponnect started"
+}
+
+#uni() {
+#   f5fpc \
+#       -s\
+#       -t vpn.univie.ac.at\
+#       -d /etc/ssl/certs/\
+#       -u milutinp00@$(pass otp uni-otp)\
+#       -p $(pass uni-pass)
+#    notify-send "VPN" "F5FPC-uni started"
+#}
+#
+#unifull() {
+#   f5fpc -s\
+#       -t vpn.univie.ac.at:8443 \
+#       -d /etc/ssl/certs/\
+#       -u milutinp00@$(pass otp uni-otp)\
+#       -p $(pass uni-pass)
+#    notify-send "VPN" "F5FPC-unifull started"
+#}
+#
+#
+#info() {
+#    f5fpc --info
+#}
+
+stop() {
+    running_wg0=$(sudo wg show | grep -Eo "wg0-(.*)")
+    if [[ -n $running_wg0 ]]; then
+        nmcli connection down $running_wg0
+        notify-send "VPN" "$running_wg0 stopped"
+    fi
+#    running_f5fpc=$(f5fpc --info | grep -Eo "session established")
+#    if [[ -n $running_f5fpc ]]; then
+#        f5fpc --stop
+#        notify-send "VPN" "F5FPC stopped"
+#    fi
+    pkill -RTMIN+6 dwmblocks
+}
+
+getip() {
+    ipv4=$(curl -4 --silent ip.me)
+    ipv6=$(curl -6 --silent ip.me)
+    notify-send "IP" "$ipv4\n$ipv6"
+}
+
+status() {
+    vpn getip
+}
+
+"$@"

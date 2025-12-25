@@ -1,0 +1,16 @@
+#!/bin/sh
+
+NETDEVICE="wlan0"
+
+case "$(cat /sys/class/net/$NETDEVICE/operstate 2>/dev/null)" in
+	down) wifiicon=""  ;;
+	up) wifiicon="" ;;
+esac
+
+echo "$wifiicon"
+
+case $BLOCK_BUTTON in
+	1) "$TERMINAL" -e nmtui; pkill -RTMIN+6 dwmblocks ;;
+    3) notify-send "Strength" "$(awk '/^\s*w/ { print int($3 * 100 / 70) "% " }' /proc/net/wireless)" ;;
+	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
+esac
