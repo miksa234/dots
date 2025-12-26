@@ -10,23 +10,14 @@ M_L = "00ffffffffffff0009d1d578455400000c180103803c22782ea595a45852a0260d5054a56
 def get_port_edids():
     ports = []
 
-    xrandr = subprocess.run(['xrandr', '--verbose'], stdout=subprocess.PIPE)
-    lines = xrandr.stdout.decode('utf-8').split('\n')
+    edid_lines = subprocess.check_output("""xrandr --props | sed -n '/EDID:/,/:/p' | tr -d "[[:blank:]]" | sed -e 's/.*:.*//' | sed -e ':a;N;$!ba;s/\\n/ /g' | sed -e "s/  /\\n/g" | tr -d ' '""", shell=True, text=True)
+    port_lines = subprocess.check_output("xrandr --props | grep ' connected ' | awk '{printf $1\"\\n\"}'" , shell=True, text=True)
 
-    get_edid = False
-    edid = ""
-    for line in lines:
-        if " connected " in line:
-            port = line.split(' ')[0]
-        if "GAMMA_LUT_SIZE" in line:
-            if get_edid == True:
-                ports.append([port , edid.replace('\t', '')])
-                edid = ""
-            get_edid = False
-        if get_edid:
-            edid += line
-        if "EDID" in line:
-            get_edid = True
+
+    ports = []
+    for edid, port in zip(edid_lines.split('\n')[:-1], port_lines.split('\n')):
+        ports += [(port, edid)]
+
     return ports
 
 
@@ -35,7 +26,6 @@ def main():
 
     left_port = None
     right_port = None
-
     for port in ports:
         if port[1] == M_L:
             left_port = port[0]
@@ -46,7 +36,7 @@ def main():
         subprocess.run([
             'xrandr',
             '--output',
-            'eDP',
+            ports[0][0],
             '--off',
             '--output',
             right_port,
