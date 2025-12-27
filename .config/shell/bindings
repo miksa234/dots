@@ -18,15 +18,13 @@ function zle-keymap-select {
 }
 zle -N zle-keymap-select
 zle-line-init() {
-    zle -K viins # initiate 'vi insert' keymap (can be removed if 'bindkey -V' has been set elsewhere)
+    zle -K viins
     echo -ne "\e[5 q"
 }
 zle -N zle-line-init
-echo -ne '\e[5 q' # Usea beam shape cursor on startup
-preexec() { echo -ne '\e[5 q' ;} # use beam shape cursor for each new prompt
+echo -ne '\e[5 q'
+preexec() { echo -ne '\e[5 q' ;}
 
-# zkbd compatible hash
-# To add other keys to this hash, see: man 5 terminfo
 typeset -g -A key
 
 key[Home]="${terminfo[khome]}"
