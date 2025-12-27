@@ -29,7 +29,7 @@ source "${XDG_CONFIG_HOME:-$HOME/.config}/shell/aliases"
 autoload -U compinit
 zstyle ':completion:*' menu select
 zmodload zsh/complist
-compinit
+compinit -C
 _comp_options+=(globdots)
 
 bindkey -v
