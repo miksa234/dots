@@ -18,7 +18,8 @@ vim.opt.smartindent = true
 vim.opt.smartcase = true
 vim.opt.expandtab = true
 
-vim.opt.undodir = os.getenv("XDG_STATE_HOME") .. "/nvim/undodir"
+vim.opt.viminfofile = os.getenv("HOME") .. "/.local/state/nvim/viminfo"
+vim.opt.undodir = os.getenv("HOME") .. "/.local/state/nvim/undodir"
 vim.opt.undofile = true
 
 vim.opt.scrolloff = 10
@@ -36,6 +37,5 @@ vim.opt.isfname:append("@-@")
 
 vim.opt.splitbelow = true
 vim.opt.splitright = true
-vim.opt.viminfofile = os.getenv("XDG_STATE_HOME") .. "/nvim/viminfo"
 
 vim.opt.spellsuggest = { "best", 5 }

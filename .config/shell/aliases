@@ -1,6 +1,6 @@
 #!/bin/sh
 
-alias sudo="sudo -E"
+alias sudo="sudo "
 alias su="sudo -E su"
 alias ls="ls --color=auto"
 alias pacman="sudo pacman"
