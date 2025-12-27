@@ -1,8 +1,7 @@
 #!/usr/bin/env zsh
 
 
-autoload -U colors && colors
-setopt autocd
+autoload colors && colors
 
 HISTSIZE=10000
 SAVEHIST=10000
