@@ -25,6 +25,12 @@ PS1=" %B${brackets:0:1} %F{${color}}%B%m%F{white}%B ${brackets:1:2}: %2~%F{white
 source "${XDG_CONFIG_HOME:-$HOME/.config}/shell/bindings"
 source "${XDG_CONFIG_HOME:-$HOME/.config}/shell/aliases"
 
+zstyle ':completion:*' completer _complete _ignored
+zstyle ':completion:*' list-colors 'di=1;36'
+zstyle ':completion:*' list-prompt %SAt %p: Hit TAB for more, or the character to insert%s
+zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} r:|[._-]=** r:|=**'
+zstyle :compinstall filename '${XDG_CONFIG_HOME:-HOME/.config}/zsh/.zshrc'
+
 autoload -U compinit
 zstyle ':completion:*' menu select
 zmodload zsh/complist
