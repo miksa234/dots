@@ -1,11 +1,11 @@
-Xft.dpi: 96
+Xft.dpi: 100
 
-dwm.font0: terminus:size=20:style=Bold
-dwm.font1: terminus:size=20:style=Bold
-dwm.dmenufont: terminus:size=20:style=Bold
-dmenu.font: terminus:size=20:style=Bold
-st.font: terminus:size=20
-st.font2: terminus:size=20
+dwm.font0: terminus:size=23:style=Bold
+dwm.font1: terminus:size=23:style=Bold
+dwm.dmenufont: terminus:size=23:style=Bold
+dmenu.font: terminus:size=23:style=Bold
+st.font: terminus:size=23
+st.font2: terminus:size=23
 
 dwm.normfgcolor:   #ffffff
 dwm.normbgcolor:   #000000

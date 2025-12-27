@@ -34,7 +34,7 @@ zstyle :compinstall filename '${XDG_CONFIG_HOME:-HOME/.config}/zsh/.zshrc'
 autoload -U compinit
 zstyle ':completion:*' menu select
 zmodload zsh/complist
-compinit -C
+compinit
 _comp_options+=(globdots)
 
 bindkey -v
