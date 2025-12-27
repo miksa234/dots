@@ -36,7 +36,6 @@ zstyle :compinstall filename '/home/mika/.config/zsh/.zshrc'
 autoload -U compinit
 zstyle ':completion:*' menu select
 zmodload zsh/complist
-compinit
 
 source "${XDG_CONFIG_HOME:-$HOME/.config}/shell/bindings"
 source "${XDG_CONFIG_HOME:-$HOME/.config}/shell/aliases"
