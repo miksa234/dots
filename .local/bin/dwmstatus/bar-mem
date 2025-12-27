@@ -1,6 +1,5 @@
 #!/bin/sh
 
-#mem=$(free -m | grep 'Mem:' | awk '{printf "%.1f/%.1f G", $2/1000, $3/1000}')
 mem=$(free -m | grep 'Mem:' | awk '{printf "%.1f G", $3/1000}')
 
 echo -n " :$mem"
