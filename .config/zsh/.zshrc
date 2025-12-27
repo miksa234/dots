@@ -8,9 +8,6 @@ if [[ ! -f ~/.cache/zsh/.histfile ]]; then
 fi
 HISTFILE=~/.cache/zsh/.histfile
 
-autoload -U colors && colors
-autoload -U compinit
-
 color="blue";
 if [[ $USER == "root" ]]; then
     color="red";
