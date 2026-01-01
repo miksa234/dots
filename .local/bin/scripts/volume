@@ -16,4 +16,8 @@ down () {
     pactl -- set-sink-volume @DEFAULT_SINK@ -$1%
 }
 
+toggle () {
+    pactl -- set-sink-mute @DEFAULT_SINK@ toggle
+}
+
 "$@"

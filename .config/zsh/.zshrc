@@ -35,6 +35,11 @@ autoload -U compinit
 zstyle ':completion:*' menu select
 zmodload zsh/complist
 compinit
+if [ "$(date +'%j')" != "$(stat -f '%Sm' -t '%j' ~/.config/zsh/.zcompdump 2>/dev/null)" ]; then
+    compinit
+else
+    compinit -C
+fi
 _comp_options+=(globdots)
 
 bindkey -v
