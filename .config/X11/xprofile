@@ -14,7 +14,7 @@ else
 fi
 
 monitor_recon &\
-xset r rate 300 50 &\
+xset r rate 200 50 &\
 xset mouse 1.8 0 &\
 setxkbmap -model p104 -layout us,de -option grp:shifts_toggle &\
 dbus-update-activation-environment --systemd DBUS_SESSION_BUS_ADDRESS DISPLAY XAUTHORITY &\
