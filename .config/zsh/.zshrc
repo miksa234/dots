@@ -34,7 +34,6 @@ zstyle :compinstall filename '${XDG_CONFIG_HOME:-HOME/.config}/zsh/.zshrc'
 autoload -U compinit
 zstyle ':completion:*' menu select
 zmodload zsh/complist
-compinit
 if [ "$(date +'%j')" != "$(stat -f '%Sm' -t '%j' ~/.config/zsh/.zcompdump 2>/dev/null)" ]; then
     compinit
 else
