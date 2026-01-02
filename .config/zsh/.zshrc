@@ -7,7 +7,7 @@ HISTSIZE=10000
 SAVEHIST=10000
 if [[ ! -f ~/.cache/zsh/.histfile ]]; then
     mkdir -p ~/.cache/zsh
-    touch ~/.cache/.histfile
+    touch ~/.cache/zsh/.histfile
 fi
 HISTFILE=~/.cache/zsh/.histfile
 setopt inc_append_history
@@ -25,7 +25,7 @@ PS1=" %B${brackets:0:1} %F{${color}}%B%m%F{white}%B ${brackets:1:2}: %2~%F{white
 source "${XDG_CONFIG_HOME:-$HOME/.config}/shell/bindings"
 source "${XDG_CONFIG_HOME:-$HOME/.config}/shell/aliases"
 
-zstyle ':completion:*' completer _complete _ignored
+zstyle ':completion:*' completer _complete _ignored _expand _approximate _expand_alias
 zstyle ':completion:*' list-colors 'di=1;36'
 zstyle ':completion:*' list-prompt %SAt %p: Hit TAB for more, or the character to insert%s
 zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} r:|[._-]=** r:|=**'
