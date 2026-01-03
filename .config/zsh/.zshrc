@@ -25,6 +25,15 @@ PS1=" %B${brackets:0:1} %F{${color}}%B%m%F{white}%B ${brackets:1:2}: %2~%F{white
 source "${XDG_CONFIG_HOME:-$HOME/.config}/shell/bindings"
 source "${XDG_CONFIG_HOME:-$HOME/.config}/shell/aliases"
 
+for p in ${(z)NIX_PROFILES}; do
+    fpath=(
+        $p/share/zsh/site-functions
+        $p/share/zsh/$ZSH_VERSION/functions
+        $p/share/zsh/vendor-completions
+        $fpath
+    )
+done
+
 zstyle ':completion:*' completer _complete _ignored _expand _approximate _expand_alias
 zstyle ':completion:*' list-colors 'di=1;36'
 zstyle ':completion:*' list-prompt %SAt %p: Hit TAB for more, or the character to insert%s
