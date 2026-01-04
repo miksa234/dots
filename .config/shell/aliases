@@ -9,6 +9,7 @@ alias shutdown="sudo shutdown -h now"
 alias reboot="sudo reboot"
 alias vim="nvim"
 alias fcd="cd \"./\$(find -type d | fzf)\""
+alias slock="sudo slock"
 
 alias mbsync="mbsync -c $XDG_CONFIG_HOME/isync/mbsyncrc"
 alias tmux="tmux -f $XDG_CONFIG_HOME/tmux/tmux.conf"
