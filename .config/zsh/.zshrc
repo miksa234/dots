@@ -12,16 +12,10 @@ fi
 HISTFILE=~/.cache/zsh/.histfile
 setopt inc_append_history
 
-eval "$(direnv hook zsh)"
+[[ -a $(which direnv) ]] && eval "$(direnv hook zsh)"
 
-color="blue";
-if [[ $USER == "root" ]]; then
-    color="red";
-fi
-brackets="";
-if [ ${IN_NIX_SHELL+1} ]; then
-    brackets="[]"
-fi
+color="blue"; [[ $USER =~ "root" ]] && color="red"
+brackets=""; [[ -v ${IN_NIX_SHELL} ]] && brackets="[]"
 
 PS1=" %B${brackets:0:1} %F{${color}}%B%m%F{white}%B ${brackets:1:2}: %2~%F{white} >%b "
 
@@ -42,9 +36,9 @@ zstyle ':completion:*' list-colors 'di=1;36'
 zstyle ':completion:*' list-prompt %SAt %p: Hit TAB for more, or the character to insert%s
 zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} r:|[._-]=** r:|=**'
 zstyle :compinstall filename '${XDG_CONFIG_HOME:-HOME/.config}/zsh/.zshrc'
+zstyle ':completion:*' menu select
 
 autoload -U compinit
-zstyle ':completion:*' menu select
 zmodload zsh/complist
 if [[ ! -f ~/.config/zsh/.zcompdump ]]; then
     compinit
