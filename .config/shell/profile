@@ -18,6 +18,7 @@ export XDG_STATE_HOME="$HOME/.local/state"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_PUBLICSHARE_DIR="$HOME/Cloud"
 export XDG_DOWNLOAD_DIR="$HOME/Downloads"
+export XDG_DOTFILES="$HOME/dots"
 
 
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
