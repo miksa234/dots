@@ -19,7 +19,7 @@ if [[ $USER == "root" ]]; then
     color="red";
 fi
 brackets="";
-if [ ${IN_NIX_SHELL+1} || ${DIRENV_DIR_FILE+1} ]; then
+if [ ${IN_NIX_SHELL+1} ]; then
     brackets="[]"
 fi
 
