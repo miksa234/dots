@@ -12,14 +12,17 @@ fi
 HISTFILE=~/.cache/zsh/.histfile
 setopt inc_append_history
 
+eval "$(direnv hook zsh)"
+
 color="blue";
 if [[ $USER == "root" ]]; then
     color="red";
 fi
 brackets="";
-if [ ${IN_NIX_SHELL+1} ]; then
+if [ ${IN_NIX_SHELL+1} || ${DIRENV_DIR_FILE+1} ]; then
     brackets="[]"
 fi
+
 PS1=" %B${brackets:0:1} %F{${color}}%B%m%F{white}%B ${brackets:1:2}: %2~%F{white} >%b "
 
 source "${XDG_CONFIG_HOME:-$HOME/.config}/shell/bindings"

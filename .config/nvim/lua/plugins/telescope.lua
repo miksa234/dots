@@ -69,6 +69,7 @@ return {
           os.getenv("XDG_CONFIG_HOME") .. "/X11",
           os.getenv("XDG_LOCAL_HOME") .. "/src",
           os.getenv("XDG_LOCAL_HOME") .. "/bin",
+          os.getenv("XDG_DOTFILES"),
         },
         hidden = true,
       })
@@ -90,6 +91,7 @@ return {
           os.getenv("XDG_CONFIG_HOME") .. "/X11",
           os.getenv("XDG_LOCAL_HOME") .. "/src",
           os.getenv("XDG_LOCAL_HOME") .. "/bin",
+          os.getenv("XDG_DOTFILES"),
         },
         hidden = true,
       })
