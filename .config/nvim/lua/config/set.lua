@@ -10,6 +10,9 @@ vim.opt.termguicolors = true
 
 vim.opt.clipboard = "unnamedplus"
 
+vim.opt.textwidth = 80
+vim.opt.wrap = true
+
 vim.opt.ignorecase = true
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
