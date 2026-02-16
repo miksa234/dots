@@ -53,3 +53,4 @@ export KEYTIMEOUT=1
 if [[ -f ${XDG_CONFIG_HOME:-$HOME/.config}/shell/colors ]]; then
     source "${XDG_CONFIG_HOME:-$HOME/.config}/shell/colors"
 fi
+export PATH=$PATH:$HOME/.maestro/bin

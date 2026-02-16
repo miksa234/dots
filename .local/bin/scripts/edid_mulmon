@@ -1,21 +1,28 @@
 #!/usr/bin/env python
 
-import re
 import subprocess
 
 M_R = "00ffffffffffff0009d1d5784554000034190103803c22782ea595a45852a0260d5054a56b80818081c08100a9c0b300d1c001010101023a801871382d40582c450056502100001e000000ff0053434630343130313031390a20000000fd00324c1e5310000a202020202020000000fc0042656e5120474c323736300a20016c020321c149901f05141304030201230907078301000067030c000000001ee2000f011d8018711c1620582c2500c48e2100009e0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000075"
 
 M_L = "00ffffffffffff0009d1d578455400000c180103803c22782ea595a45852a0260d5054a56b80818081c08100a9c0b300d1c001010101023a801871382d40582c450056502100001e000000ff0048334530343230333031390a20000000fd00324c1e5310000a202020202020000000fc0042656e5120474c323736300a2001ae020321c149901f05141304030201230907078301000067030c000000001ee2000f011d8018711c1620582c2500c48e2100009e0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000075"
 
+
 def get_port_edids():
     ports = []
 
-    edid_lines = subprocess.check_output("""xrandr --props | sed -n '/EDID:/,/:/p' | tr -d "[[:blank:]]" | sed -e 's/.*:.*//' | sed -e ':a;N;$!ba;s/\\n/ /g' | sed -e "s/  /\\n/g" | tr -d ' '""", shell=True, text=True)
-    port_lines = subprocess.check_output("xrandr --props | grep ' connected ' | awk '{printf $1\"\\n\"}'" , shell=True, text=True)
-
+    edid_lines = subprocess.check_output(
+        """xrandr --props | sed -n '/EDID:/,/:/p' | tr -d "[[:blank:]]" | sed -e 's/.*:.*//' | sed -e ':a;N;$!ba;s/\\n/ /g' | sed -e "s/  /\\n/g" | tr -d ' '""",
+        shell=True,
+        text=True,
+    )
+    port_lines = subprocess.check_output(
+        "xrandr --props | grep ' connected ' | awk '{printf $1\"\\n\"}'",
+        shell=True,
+        text=True,
+    )
 
     ports = []
-    for edid, port in zip(edid_lines.split('\n')[:-1], port_lines.split('\n')):
+    for edid, port in zip(edid_lines.split("\n")[:-1], port_lines.split("\n")):
         ports += [(port, edid)]
 
     return ports
@@ -33,16 +40,19 @@ def main():
             right_port = port[0]
 
     if left_port is not None and right_port is not None:
-        subprocess.run([
-            'xrandr',
-            '--output',
-            ports[0][0],
-            '--off',
-            '--output',
-            right_port,
-            '--right-of',
-            left_port
-        ], stdout=subprocess.PIPE)
+        subprocess.run(
+            [
+                "xrandr",
+                "--output",
+                ports[0][0],
+                "--off",
+                "--output",
+                right_port,
+                "--right-of",
+                left_port,
+            ],
+            stdout=subprocess.PIPE,
+        )
 
 
 if __name__ == "__main__":

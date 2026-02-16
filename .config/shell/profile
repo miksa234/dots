@@ -65,9 +65,11 @@ export JAVA_HOME=/usr/lib/jvm/default
 
 # Android dev:
 export GRADLE_USER_HOME="$XDG_DATA_HOME"/gradle
-export ANDROID_HOME=$XDG_DATA_HOME/Android/SDK/
+export ANDROID_HOME=$XDG_DATA_HOME/Android/SDK
+export ANDROID_SDK_ROOT=$XDG_DATA_HOME/Android/SDK
 export PATH=$PATH:$ANDROID_HOME/emulator
 export PATH=$PATH:$ANDROID_HOME/platform-tools
+export PATH=$PATH:$HOME/.maestro/bin/
 
 # Other:
 export NOTMUCH_CONFIG="$XDG_CONFIG_HOME/notmuch-config"

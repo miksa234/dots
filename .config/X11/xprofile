@@ -13,6 +13,7 @@ else
     xrdb $XDG_CONFIG_HOME/X/Xresources &
 fi
 
+background
 monitor_recon &\
 xset r rate 200 50 &\
 xset mouse 1.8 0 &\
