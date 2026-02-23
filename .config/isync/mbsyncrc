@@ -106,6 +106,33 @@ MaxMessages 0
 ExpireUnread no
 # End profile
 
+IMAPStore milutin@oari.io-remote
+Host mail.privateemail.com
+Port 993
+User milutin@oari.io
+PassCmd "pass milutin@oari.io"
+AuthMechs LOGIN
+# SSLType IMAPS
+TLSType IMAPS
+CertificateFile /etc/ssl/certs/ca-certificates.crt
+
+MaildirStore milutin@oari.io-local
+Subfolders Verbatim
+Path /home/mika/.local/share/mail/milutin@oari.io/
+Inbox /home/mika/.local/share/mail/milutin@oari.io/INBOX
+Flatten .
+
+Channel milutin@oari.io
+Expunge Both
+Far :milutin@oari.io-remote:
+Near :milutin@oari.io-local:
+Patterns * !"[Gmail]/All Mail"
+Create Both
+SyncState *
+MaxMessages 0
+ExpireUnread no
+# End profile
+
 #IMAPStore a11807930@unet.univie.ac.at-remote
 #Host imap.univie.ac.at
 #Port 993

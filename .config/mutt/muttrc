@@ -15,4 +15,6 @@ macro index,pager i4 '<sync-mailbox><enter-command>source /home/mika/.config/mut
 
 macro index,pager i5 '<sync-mailbox><enter-command>source /home/mika/.config/mutt/accounts/5-info@ponnect.rs.muttrc<enter><change-folder>!<enter>;<check-stats>' "switch to info@ponnect.rs"
 
+macro index,pager i6 '<sync-mailbox><enter-command>source /home/mika/.config/mutt/accounts/6-milutin@oari.io.muttrc<enter><change-folder>!<enter>;<check-stats>' "switch to milutin@oari.io"
+
 set signature = $XDG_CONFIG_HOME/mutt/signature
