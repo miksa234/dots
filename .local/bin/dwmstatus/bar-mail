@@ -1,23 +1,20 @@
 #!/bin/sh
 
 
-number_of_mails=$( (ls $XDG_DATA_HOME/mail/milutin@popovic.xyz/INBOX/new &\
-                    ls $XDG_DATA_HOME/mail/a11807930@unet.univie.ac.at/INBOX/new &\
-                    ls $XDG_DATA_HOME/mail/mika@popovic.xyz/INBOX/new) | wc -l)
+n_mails=$(find "$XDG_DATA_HOME/mail" -path '*/INBOX/new/*' -type f 2>/dev/null | wc -l)
 
 last_new=$(cat $XDG_CACHE_HOME/status/mail.new)
 
-
-if [[ $number_of_mails -gt $last_new ]]
+if [[ $n_mails -gt $last_new ]]
 then
-    notify-send "New Email" "$number_of_mails new messages"
-    echo $number_of_mails > $XDG_CACHE_HOME/status/mail.new
+    notify-send "New Email" "$n_mails new messages"
+    echo $n_mails > $XDG_CACHE_HOME/status/mail.new
 
 else
-    echo $number_of_mails > $XDG_CACHE_HOME/status/mail.new
+    echo $n_mails > $XDG_CACHE_HOME/status/mail.new
 fi
 
-if [[ "number_of_mails" -gt "0" ]]
+if [[ $n_mails -gt "0" ]]
 then
     echo ""
 fi

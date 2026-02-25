@@ -46,7 +46,21 @@ autocmd({'BufWritePost'}, {
 	command = '!cd ~/.local/src/slock/; sudo make clean install && { killall -q slock;setsid & }',
 })
 
+-- Convert two spaces to tabs in router folder
+autocmd({'BufWritePre'}, {
+	pattern = '*/router/*',
+	callback = function()
+		vim.cmd([[%s/  /\t/ge]])
+	end,
+})
 
+-- Convert two spaces to tabs in router folder
+autocmd({'BufEnter'}, {
+	pattern = '*/router/*',
+	callback = function()
+		vim.cmd([[%s/\t/  /ge]])
+	end,
+})
 
 
 
