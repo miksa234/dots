@@ -54,7 +54,7 @@ autocmd({'BufWritePre'}, {
 	end,
 })
 
--- Convert two spaces to tabs in router folder
+-- Convert tabs to two spaces on buf enter
 autocmd({'BufEnter'}, {
 	pattern = '*/router/*',
 	callback = function()
@@ -62,6 +62,13 @@ autocmd({'BufEnter'}, {
 	end,
 })
 
+-- Convert double qotes to single qotes on save
+autocmd({'BufWritePre'}, {
+	pattern = '*/router/*',
+	callback = function()
+		vim.cmd([[%s/"/'/ge]])
+	end,
+})
 
 
 
