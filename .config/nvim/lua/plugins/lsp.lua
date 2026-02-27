@@ -8,13 +8,6 @@ return {
     "hrsh7th/nvim-cmp",
 		"hrsh7th/cmp-nvim-lsp",
 	},
-	opts = {
-	   setup = {
-		  rust_analyzer = function()
-			 return true
-		  end,
-	   },
-	},
 	config = function ()
     map = vim.keymap.set
 		vim.opt.signcolumn = 'yes'
@@ -63,7 +56,6 @@ return {
         "nginx_language_server",
         "pyright",
         "eslint",
-        "rust_analyzer",
         "tailwindcss",
         "vtsls",
         "nil_ls",
@@ -113,7 +105,6 @@ return {
             }
           })
         end,
-				["rust_analyzer"] = function() end,
 				["lua_ls"] = function()
 					local lspconfig = require("lspconfig")
 					lspconfig.lua_ls.setup({
