@@ -1,6 +1,6 @@
 return {
 	'mrcjkb/rustaceanvim',
-	version = '^6',
+	version = '^8',
 	lazy = false,
 	dependencies = {
 		"mason-org/mason-registry",
@@ -38,6 +38,7 @@ return {
 							enable = true;
 						},
 						cargo = {
+            loadOutDirsFromCheck = true,
 							allFeatures = true,
 						},
 					},
