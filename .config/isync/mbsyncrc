@@ -10,8 +10,8 @@ CertificateFile /etc/ssl/certs/ca-certificates.crt
 
 MaildirStore milutin@popovic.xyz-local
 Subfolders Verbatim
-Path /home/mika/.local/share/mail/milutin@popovic.xyz/
-Inbox /home/mika/.local/share/mail/milutin@popovic.xyz/INBOX
+Path ~/.local/share/mail/milutin@popovic.xyz/
+Inbox ~/.local/share/mail/milutin@popovic.xyz/INBOX
 Flatten .
 
 Channel milutin@popovic.xyz
@@ -37,8 +37,8 @@ CertificateFile /etc/ssl/certs/ca-certificates.crt
 
 MaildirStore mika@popovic.xyz-local
 Subfolders Verbatim
-Path /home/mika/.local/share/mail/mika@popovic.xyz/
-Inbox /home/mika/.local/share/mail/mika@popovic.xyz/INBOX
+Path ~/.local/share/mail/mika@popovic.xyz/
+Inbox ~/.local/share/mail/mika@popovic.xyz/INBOX
 Flatten .
 
 Channel mika@popovic.xyz
@@ -64,8 +64,8 @@ CertificateFile /etc/ssl/certs/ca-certificates.crt
 
 MaildirStore milutin@ponnect.rs-local
 Subfolders Verbatim
-Path /home/mika/.local/share/mail/milutin@ponnect.rs/
-Inbox /home/mika/.local/share/mail/milutin@ponnect.rs/INBOX
+Path ~/.local/share/mail/milutin@ponnect.rs/
+Inbox ~/.local/share/mail/milutin@ponnect.rs/INBOX
 Flatten .
 
 Channel milutin@ponnect.rs
@@ -91,8 +91,8 @@ CertificateFile /etc/ssl/certs/ca-certificates.crt
 
 MaildirStore info@ponnect.rs-local
 Subfolders Verbatim
-Path /home/mika/.local/share/mail/info@ponnect.rs/
-Inbox /home/mika/.local/share/mail/info@ponnect.rs/INBOX
+Path ~/.local/share/mail/info@ponnect.rs/
+Inbox ~/.local/share/mail/info@ponnect.rs/INBOX
 Flatten .
 
 Channel info@ponnect.rs
@@ -118,8 +118,8 @@ CertificateFile /etc/ssl/certs/ca-certificates.crt
 
 MaildirStore milutin@oari.io-local
 Subfolders Verbatim
-Path /home/mika/.local/share/mail/milutin@oari.io/
-Inbox /home/mika/.local/share/mail/milutin@oari.io/INBOX
+Path ~/.local/share/mail/milutin@oari.io/
+Inbox ~/.local/share/mail/milutin@oari.io/INBOX
 Flatten .
 
 Channel milutin@oari.io
@@ -145,8 +145,8 @@ ExpireUnread no
 #
 #MaildirStore a11807930@unet.univie.ac.at-local
 #Subfolders Verbatim
-#Path /home/mika/.local/share/mail/a11807930@unet.univie.ac.at/
-#Inbox /home/mika/.local/share/mail/a11807930@unet.univie.ac.at/INBOX
+#Path ~/.local/share/mail/a11807930@unet.univie.ac.at/
+#Inbox ~/.local/share/mail/a11807930@unet.univie.ac.at/INBOX
 #Flatten .
 #
 #Channel a11807930@unet.univie.ac.at
