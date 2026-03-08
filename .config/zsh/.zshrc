@@ -21,6 +21,9 @@ PS1=" %B${brackets:0:1} %F{${color}}%B%m%F{white}%B ${brackets:1:2}: %2~%F{white
 
 source "${XDG_CONFIG_HOME:-$HOME/.config}/shell/bindings"
 source "${XDG_CONFIG_HOME:-$HOME/.config}/shell/aliases"
+if [[ $(uname -m) == 'arm64' ]]; then
+     eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
 
 for p in ${(z)NIX_PROFILES}; do
     fpath=(
