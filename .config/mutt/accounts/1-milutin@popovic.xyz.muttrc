@@ -5,9 +5,9 @@ set from = "milutin@popovic.xyz"
 set status_format = "milutin@popovic.xyz"
 set sendmail = "msmtp -a milutin@popovic.xyz"
 alias me  <milutin@popovic.xyz>
-set folder = "/home/mika/.local/share/mail/milutin@popovic.xyz"
-set header_cache = /home/mika/.cache/mutt-wizard/milutin@popovic.xyz/headers
-set message_cachedir = /home/mika/.cache/mutt-wizard/milutin@popovic.xyz/bodies
+set folder = "~/.local/share/mail/milutin@popovic.xyz"
+set header_cache = ~/.cache/mutt-wizard/milutin@popovic.xyz/headers
+set message_cachedir = ~/.cache/mutt-wizard/milutin@popovic.xyz/bodies
 set mbox_type = Maildir
 
 bind index,pager gg noop

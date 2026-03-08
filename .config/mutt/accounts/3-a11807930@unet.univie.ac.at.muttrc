@@ -5,9 +5,9 @@ set from = "a11807930@unet.univie.ac.at"
 set status_format = "unet.univie.ac.at"
 set sendmail = "msmtp -a a11807930@unet.univie.ac.at"
 alias me Milutin Popovic <a11807930@unet.univie.ac.at>
-set folder = "/home/mika/.local/share/mail/a11807930@unet.univie.ac.at"
-set header_cache = /home/mika/.cache/mutt-wizard/a11807930@unet.univie.ac.at/headers
-set message_cachedir = /home/mika/.cache/mutt-wizard/a11807930@unet.univie.ac.at/bodies
+set folder = "~/.local/share/mail/a11807930@unet.univie.ac.at"
+set header_cache = ~/.cache/mutt-wizard/a11807930@unet.univie.ac.at/headers
+set message_cachedir = ~/.cache/mutt-wizard/a11807930@unet.univie.ac.at/bodies
 set mbox_type = Maildir
 
 bind index,pager gg noop
