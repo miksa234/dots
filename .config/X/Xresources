@@ -27,6 +27,8 @@ dmenu.alphaout: 230
 dmenu.lines: 15
 
 slock.draw_on_two: 0
+slock.user: mika
+slock.group: users
 
 st.alpha : 0.96
 

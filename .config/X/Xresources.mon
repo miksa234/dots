@@ -27,6 +27,8 @@ dmenu.lines: 15
 st.alpha : 1
 
 slock.draw_on_two: 1
+slock.user: mika
+slock.group: users
 
 Xcursor.size: 10
 
