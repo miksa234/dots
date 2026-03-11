@@ -25,7 +25,7 @@ xidlehook \
     --not-when-fullscreen \
     --not-when-audio\
     --timer 300 \
-        'slock' \
+        'sudo slock' \
         '' \
     --timer 900 \
         'systemctl suspend-then-hibernate' \
