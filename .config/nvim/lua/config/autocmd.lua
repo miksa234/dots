@@ -2,72 +2,47 @@ local autocmd = vim.api.nvim_create_autocmd
 
 -- Delete trailing whitespace
 autocmd({'BufWritePre'}, {
-	pattern = '*',
-	command = [[%s/\s\+$//e]],
+  pattern = '*',
+  command = [[%s/\s\+$//e]],
 })
 
 autocmd({'BufEnter'}, {
-	pattern = 'justfile',
-	command = "set filetype=make";
+  pattern = 'justfile',
+  command = "set filetype=make";
 })
 
 autocmd({'BufWritePost'}, {
-	pattern = vim.fn.expand('~') .. '/.config/X/Xresources',
-	command = '!xrdb %',
+  pattern = vim.fn.expand('~') .. '/.config/X/Xresources',
+  command = '!xrdb %',
 })
 
 autocmd({'BufWritePost'}, {
-	pattern = vim.fn.expand('~') .. '/.config/X/Xresources.mon',
-	command = '!xrdb %',
+  pattern = vim.fn.expand('~') .. '/.config/X/Xresources.mon',
+  command = '!xrdb %',
 })
-
---autocmd({'BufWritePost'}, {
---	pattern = vim.fn.expand('~') .. '/.local/src/dmenu/config.def.h',
---	command = '!cd ~/.local/src/dmenu/; sudo make clean install && { killall -q dmenu}',
---})
---
---autocmd({'BufWritePost'}, {
---	pattern = vim.fn.expand('~') .. '/.local/src/dwm/config.def.h',
---	command = '!cd ~/.local/src/dwm/; sudo make clean install && { killall -q dwm;setsid dwm & }',
---})
---
---autocmd({'BufWritePost'}, {
---	pattern = vim.fn.expand('~') .. '/.local/src/dwmblocks/config.h',
---	command = '!cd ~/.local/src/dwmblocks/; sudo make clean install && { killall -q dwmblocks;setsid dwmblocks & }',
---})
---
---autocmd({'BufWritePost'}, {
---	pattern = vim.fn.expand('~') .. '/.local/src/st/config.h',
---	command = '!cd ~/.local/src/st/; sudo make clean install && { killall -q st;setsid st & }',
---})
---
---autocmd({'BufWritePost'}, {
---	pattern = vim.fn.expand('~') .. '/.local/src/slock/config.h',
---	command = '!cd ~/.local/src/slock/; sudo make clean install && { killall -q slock;setsid & }',
---})
 
 -- Convert two spaces to tabs in router folder
 autocmd({'BufWritePre'}, {
-	pattern = '*/router/*.ts',
-	callback = function()
-		vim.cmd([[%s/  /\t/ge]])
-	end,
+  pattern = '*/oari/*.ts',
+  callback = function()
+    vim.cmd([[%s/  /\t/ge]])
+  end,
 })
 
 -- Convert tabs to two spaces on buf enter
 autocmd({'BufEnter'}, {
-	pattern = '*/router/*.ts',
-	callback = function()
-		vim.cmd([[%s/\t/  /ge]])
-	end,
+  pattern = '*/oari/*.ts',
+  callback = function()
+    vim.cmd([[%s/\t/  /ge]])
+  end,
 })
 
 -- Convert double qotes to single qotes on save
 autocmd({'BufWritePre'}, {
-	pattern = '*/router/*.ts',
-	callback = function()
-		vim.cmd([[%s/"/'/ge]])
-	end,
+  pattern = '*/oari/*.ts',
+  callback = function()
+    vim.cmd([[%s/"/'/ge]])
+  end,
 })
 
 

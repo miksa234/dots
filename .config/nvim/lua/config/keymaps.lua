@@ -16,7 +16,7 @@ vim.keymap.set("n", "<leader>b", ":! firefox %")
 vim.keymap.set('c', 'w!!', ':w ! sudo tee % > /dev/null')
 
 vim.keymap.set('n', '<C-S>', function()
-	local bad = vim.fn.expand("<cword>")
-	local word_list = vim.fn.spellsuggest(bad)
-	end
+  local bad = vim.fn.expand("<cword>")
+  local word_list = vim.fn.spellsuggest(bad)
+  end
 )
