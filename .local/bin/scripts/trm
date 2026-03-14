@@ -21,14 +21,13 @@ finish() {
 }
 
 start() {
-	var=$(nmcli | grep wlp3s0:\ connect | awk '{printf $4}')
-    transmission-daemon -g /home/mika/.config/transmission-daemon/ --foreground --log-info 2<&1 |\
+    transmission-daemon -g /home/mika/.config/transmission-daemon/ --foreground --log-level=info 2>&1 |\
     while read line; do
             echo $line |\
                 grep -v "announcer.c:\|platform.c:\|announce done (tr-dht.c:" |\
                 grep -v "Saved.*variant.c:" |\
                 while read line; do
-                    echo $line | grep -q started &&\
+                    echo $line | grep -qi "starting\|started" &&\
                     notify-send "Transmission Started" " "
                     echo $line | systemd-cat --identifier="TransWrap" --priority=5
                 done 2>&1 > /dev/null

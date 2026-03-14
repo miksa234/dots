@@ -1,4 +1,4 @@
 [Desktop Entry]
 Type=Application
 Name=Calendar
-Exec=/usr/local/bin/st -e calcurse -i %u
+Exec=st -e calcurse -i %u
