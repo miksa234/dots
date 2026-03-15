@@ -27,9 +27,8 @@ start() {
                 grep -v "announcer.c:\|platform.c:\|announce done (tr-dht.c:" |\
                 grep -v "Saved.*variant.c:" |\
                 while read line; do
-                    echo $line | grep -qi "starting\|started" &&\
+                    echo $line | grep -qi "Serving RPC and Web requests" &&\
                     notify-send "Transmission Started" " "
-                    echo $line | systemd-cat --identifier="TransWrap" --priority=5
                 done 2>&1 > /dev/null
         done&disown;
         exit 0
