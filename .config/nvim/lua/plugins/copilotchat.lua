@@ -7,7 +7,6 @@ return {
   event = "VeryLazy",
   build = "make tiktoken",
   opts = {
-    model = "claude-sonnet-4.5",
     window = {
       layout = 'horizontal',
       width = 1,
