@@ -5,7 +5,7 @@ set from = "milutin@ponnect.rs"
 set status_format = "milutin@ponnect.rs"
 set sendmail = "msmtp -a milutin@ponnect.rs"
 alias me  <milutin@ponnect.rs>
-set folder = "~/.local/share/mail/milutin@ponnect.rs"
+set folder = "~/.local/share/mail/4-milutin@ponnect.rs"
 set header_cache = ~/.cache/mutt-wizard/milutin@ponnect.rs/headers
 set message_cachedir = ~/.cache/mutt-wizard/milutin@ponnect.rs/bodies
 set mbox_type = Maildir
