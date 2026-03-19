@@ -7,6 +7,7 @@ return {
   event = "VeryLazy",
   build = "make tiktoken",
   opts = {
+    model = "gpt-5.2",
     window = {
       layout = 'horizontal',
       width = 1,
