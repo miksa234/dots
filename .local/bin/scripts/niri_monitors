@@ -1,0 +1,27 @@
+#!/usr/bin/env zsh
+
+function mulmon_activate() {
+    cp $XDG_CONFIG_HOME/niri/config.mulmon.kdl $XDG_CONFIG_HOME/niri/config.kdl
+    MONITOR_OUT=1
+}
+
+function mulmon_deactivate() {
+    cp $XDG_CONFIG_HOME/niri/config.laptop.kdl $XDG_CONFIG_HOME/niri/config.kdl
+    MONITOR_OUT=0
+}
+
+function active_connection() {
+    (( $(niri msg outputs | grep -E "H3E04203019|SCF0410101"| wc -l) == 2 ))
+}
+
+while true; do
+    if active_connection && [[ $MONITOR_OUT -eq 0 ]]; then
+        mulmon_activate
+    fi
+
+    if ! active_connection && [[ $MONITOR_OUT -eq 1 ]]; then
+        mulmon_deactivate
+    fi
+
+    sleep 2
+done
