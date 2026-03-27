@@ -10,12 +10,14 @@ function mulmon_activate() {
         sleep 1
     done
     set_kb_mouse
+    sudo powerprofilesctl set performance &
     MONITOR_OUT=1
 }
 
 function mulmon_deactivate() {
     xrandr --auto
     xrdb $XDG_CONFIG_HOME/X/Xresources
+    sudo powerprofilesctl set balanced &
     MONITOR_OUT=0
 }
 
@@ -30,6 +32,12 @@ while true; do
 
     if ! active_connection && [[ $MONITOR_OUT -eq 1 ]]; then
         mulmon_deactivate
+    fi
+
+    if [[ $(cat /sys/class/power_supply/ACAD/online) == "1" ]] then
+        sudo powerprofilesctl set performance &
+    else
+        sudo powerprofilesctl set balanced &
     fi
 
     sleep 2

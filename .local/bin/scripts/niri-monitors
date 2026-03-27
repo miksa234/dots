@@ -23,5 +23,11 @@ while true; do
         mulmon_deactivate
     fi
 
+    if [[ $(cat /sys/class/power_supply/ACAD/online) == "1" ]] then
+        sudo powerprofilesctl set performance &
+    else
+        sudo powerprofilesctl set balanced &
+    fi
+
     sleep 2
 done
