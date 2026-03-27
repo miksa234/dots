@@ -3,4 +3,9 @@
 WALLDIR="${XDG_DATA_HOME}/wallpaper"
 WALLPAPER=$(ls -1 $WALLDIR | sort -R | tail -1)
 
-feh --no-fehbg --bg-scale "$WALLDIR/${WALLPAPER}"
+
+if [[ -n ${WAYLAND_DISPLAY:-} ]] || [[ ${XDG_SESSION_TYPE:-} == "wayland" ]]; then
+    swaybg -i "$WALLDIR/${WALLPAPER}" -m fill
+else
+    feh --no-fehbg --bg-scale "$WALLDIR/${WALLPAPER}"
+fi

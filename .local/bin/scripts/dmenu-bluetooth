@@ -327,6 +327,11 @@ show_menu() {
 # dmenu command to pipe into. Extra arguments to dmenu-bluetooth are passed through to dmenu. This
 # allows the user to set fonts, sizes, colours, etc.
 DMENU_BLUETOOTH_LAUNCHER="${DMENU_BLUETOOTH_LAUNCHER:-dmenu}"
+
+is_wayland() {
+    [[ -n "${WAYLAND_DISPLAY:-}" ]] || [[ "${XDG_SESSION_TYPE:-}" == "wayland" ]]
+}
+
 run_dmenu() {
     case "$DMENU_BLUETOOTH_LAUNCHER" in
         rofi)
@@ -334,6 +339,11 @@ run_dmenu() {
             ;;
         fuzzel)
             DMENU_BLUETOOTH_LAUNCHER="fuzzel --dmenu"
+            ;;
+        dmenu)
+            if is_wayland && command -v dmenu-wl >/dev/null 2>&1; then
+                DMENU_BLUETOOTH_LAUNCHER="dmenu-wl"
+            fi
             ;;
     esac
     $DMENU_BLUETOOTH_LAUNCHER -i -p "$DMENU_BLUETOOTH_PROMPT" "${dmenu_args[@]}"
