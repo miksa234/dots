@@ -1,12 +1,12 @@
 #!/usr/bin/env zsh
 
 function mulmon_activate() {
-    ln -sf $XDG_CONFIG_HOME/niri/config.mulmon.kdl $XDG_CONFIG_HOME/niri/config.kdl
+#    ln -sf $XDG_CONFIG_HOME/niri/config.mulmon.kdl $XDG_CONFIG_HOME/niri/config.kdl
     MONITOR_OUT=1
 }
 
 function mulmon_deactivate() {
-    ln -sf $XDG_CONFIG_HOME/niri/config.laptop.kdl $XDG_CONFIG_HOME/niri/config.kdl
+#    ln -sf $XDG_CONFIG_HOME/niri/config.laptop.kdl $XDG_CONFIG_HOME/niri/config.kdl
     MONITOR_OUT=0
 }
 
