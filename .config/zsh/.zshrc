@@ -50,9 +50,6 @@ else
 fi
 _comp_options+=(globdots)
 
-bindkey -v
-export KEYTIMEOUT=1
-
 if [[ -f ${XDG_CONFIG_HOME:-$HOME/.config}/shell/colors ]]; then
     source "${XDG_CONFIG_HOME:-$HOME/.config}/shell/colors"
 fi
