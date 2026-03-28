@@ -1,5 +1,13 @@
 #!/usr/bin/env zsh
 
+function move_workspaces(monitor, direction)
+    for nw in $(sq 1 9); do
+        niri msg action\
+            move-workspace-to-monitor\
+            --reference "${direction}${nw}"\
+            $monitor
+    done
+
 function mulmon_activate() {
 #    ln -sf $XDG_CONFIG_HOME/niri/config.mulmon.kdl $XDG_CONFIG_HOME/niri/config.kdl
     MONITOR_OUT=1
@@ -13,6 +21,15 @@ function mulmon_deactivate() {
 function active_connection() {
     (( $(niri msg outputs | grep -E "H3E04203019|SCF0410101"| wc -l) == 2 ))
 }
+
+mon_l="PNP(BNQ) BenQ GL2760 H3E04203019"
+mon_r="PNP(BNQ) BenQ GL2760 SCF04101019"
+
+if active_connection; then
+    mulmon_activate
+    move_workspaces $mon_l "l"
+    move_workspaces $mon_r "r"
+fi
 
 while true; do
     if active_connection && [[ $MONITOR_OUT -eq 0 ]]; then
