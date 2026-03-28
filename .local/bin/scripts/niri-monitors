@@ -1,49 +1,63 @@
-#!/usr/bin/env zsh
+#!/bin/sh
 
-function move_workspaces(monitor, direction)
-    for nw in $(sq 1 9); do
-        niri msg action\
-            move-workspace-to-monitor\
-            --reference "${direction}${nw}"\
-            $monitor
+move_workspaces() {
+    monitor=$1
+    direction=$2
+
+    for nw in 1 2 3 4 5 6 7 8 9; do
+        niri msg action \
+            move-workspace-to-monitor \
+            --reference "${direction}${nw}" \
+            "$monitor"
     done
+}
 
-function mulmon_activate() {
-#    ln -sf $XDG_CONFIG_HOME/niri/config.mulmon.kdl $XDG_CONFIG_HOME/niri/config.kdl
+mulmon_activate() {
+#    ln -sf "$XDG_CONFIG_HOME/niri/config.mulmon.kdl" "$XDG_CONFIG_HOME/niri/config.kdl"
     MONITOR_OUT=1
+    export MONITOR_OUT
 }
 
-function mulmon_deactivate() {
-#    ln -sf $XDG_CONFIG_HOME/niri/config.laptop.kdl $XDG_CONFIG_HOME/niri/config.kdl
+mulmon_deactivate() {
+#    ln -sf "$XDG_CONFIG_HOME/niri/config.laptop.kdl" "$XDG_CONFIG_HOME/niri/config.kdl"
     MONITOR_OUT=0
+    export MONITOR_OUT
 }
 
-function active_connection() {
-    (( $(niri msg outputs | grep -E "H3E04203019|SCF0410101"| wc -l) == 2 ))
+active_connection() {
+    count=$(niri msg outputs | grep -E "H3E04203019|SCF04101019" | wc -l | tr -d ' ')
+    [ "$count" -eq 2 ]
 }
+
+MONITOR_OUT=${MONITOR_OUT:-0}
 
 mon_l="PNP(BNQ) BenQ GL2760 H3E04203019"
 mon_r="PNP(BNQ) BenQ GL2760 SCF04101019"
 
 if active_connection; then
     mulmon_activate
-    move_workspaces $mon_l "l"
-    move_workspaces $mon_r "r"
+    move_workspaces "$mon_l" "l"
+    move_workspaces "$mon_r" "r"
 fi
 
-while true; do
-    if active_connection && [[ $MONITOR_OUT -eq 0 ]]; then
-        mulmon_activate
-    fi
-
-    if ! active_connection && [[ $MONITOR_OUT -eq 1 ]]; then
-        mulmon_deactivate
-    fi
-
-    if [[ $(cat /sys/class/power_supply/ACAD/online) == "1" ]] then
-        sudo powerprofilesctl set performance &
+while :; do
+    if active_connection; then
+        if [ "$MONITOR_OUT" -eq 0 ]; then
+            mulmon_activate
+            move_workspaces "$mon_l" "l"
+            move_workspaces "$mon_r" "r"
+        fi
     else
-        sudo powerprofilesctl set balanced &
+        if [ "$MONITOR_OUT" -eq 1 ]; then
+            mulmon_deactivate
+        fi
+    fi
+
+    ac_online=$(cat /sys/class/power_supply/ACAD/online 2>/dev/null || echo 0)
+    if [ "$ac_online" = "1" ]; then
+        sudo powerprofilesctl set performance
+    else
+        sudo powerprofilesctl set balanced
     fi
 
     sleep 2
