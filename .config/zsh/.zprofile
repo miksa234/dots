@@ -4,6 +4,6 @@ if [[ -z $DISPLAY && $XDG_VTNR -eq 1 ]]; then
   if command -v dwm >/dev/null 2>&1; then
     exec startx "$XDG_CONFIG_HOME/X11/xinitrc" vt1
   else
-    exec niri-session -l
+    exec ZSH_SYSTEM_CLIPBOARD_USE_WL_CLIPBOARD=1 niri-session -l
   fi
 fi
