@@ -342,7 +342,7 @@ run_dmenu() {
             ;;
         dmenu)
             if is_wayland && command -v dmenu-wl >/dev/null 2>&1; then
-                DMENU_BLUETOOTH_LAUNCHER="dmenu-wl"
+                DMENU_BLUETOOTH_LAUNCHER="dmenu-niri"
             fi
             ;;
     esac

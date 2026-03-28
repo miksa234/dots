@@ -1,0 +1,15 @@
+#!/bin/sh
+
+minitor=$(niri msg focused-output | grep Output | sed 's/.*(\(.*\)).*/\1/')
+
+dmenu-wl_run \
+    -m "$minitor"\
+    -i \
+    -l 15 \
+    -fn "Terminus 14"\
+    -nf "#ffffff"\
+    -b \
+    -nb "#000000"\
+    -sf "#000000" \
+    -sb "#6CA98A"\
+

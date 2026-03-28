@@ -13,9 +13,9 @@ password_files=( "$prefix"/**/*.gpg )
 password_files=( "${password_files[@]#"$prefix"/}" )
 password_files=( "${password_files[@]%.gpg}" )
 
-dmenu_cmd=(dmenu -l 15)
+dmenu_cmd=(dmenu)
 if [[ -n ${WAYLAND_DISPLAY:-} ]] || [[ ${XDG_SESSION_TYPE:-} == "wayland" ]]; then
-	dmenu_cmd=(dmenu-wl -l 15)
+	dmenu_cmd=(dmenu-niri)
 fi
 
 password=$(printf '%s\n' "${password_files[@]}" | "${dmenu_cmd[@]}" "$@")
