@@ -1,0 +1,15 @@
+#!/bin/sh
+
+while :; do
+    n_mails=$(find "$XDG_DATA_HOME/mail" -path '*/INBOX/new/*' -type f 2>/dev/null | wc -l)
+    last_new=$(cat $XDG_CACHE_HOME/status/mail.new)
+    if [[ $n_mails -gt $last_new ]]
+    then
+        notify-send "New Email" "$n_mails new messages"
+        echo $n_mails > $XDG_CACHE_HOME/status/mail.new
+
+    else
+        echo $n_mails > $XDG_CACHE_HOME/status/mail.new
+    fi
+    sleep 1
+done
