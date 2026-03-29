@@ -342,7 +342,7 @@ run_dmenu() {
             ;;
         dmenu)
             if is_wayland && command -v dmenu-wl >/dev/null 2>&1; then
-                DMENU_BLUETOOTH_LAUNCHER='dmenu_cmd=(dmenu-wl_run -m "$minitor" -i  -l 15  -fn "Terminus 14" -nf "#ffffff" -b  -nb "#000000" -sf "#000000" -sb "#6CA98A")'
+                DMENU_BLUETOOTH_LAUNCHER="dmenu-niri"
             fi
             ;;
     esac

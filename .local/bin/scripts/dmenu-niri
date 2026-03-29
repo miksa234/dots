@@ -2,7 +2,7 @@
 
 minitor=$(niri msg focused-output | grep Output | sed 's/.*(\(.*\)).*/\1/')
 
-dmenu-wl_run \
+dmenu-wl \
     -m "$minitor"\
     -i \
     -l 15 \
@@ -11,5 +11,5 @@ dmenu-wl_run \
     -b \
     -nb "#000000"\
     -sf "#000000" \
-    -sb "#6CA98A"\
+    -sb "#6CA98A" "$@"
 

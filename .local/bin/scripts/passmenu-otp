@@ -15,8 +15,7 @@ password_files=( "${password_files[@]%.gpg}" )
 
 dmenu_cmd=(dmenu)
 if [[ -n ${WAYLAND_DISPLAY:-} ]] || [[ ${XDG_SESSION_TYPE:-} == "wayland" ]]; then
-    minitor=$(niri msg focused-output | grep Output | sed 's/.*(\(.*\)).*/\1/')
-	dmenu_cmd=(dmenu-wl_run -m "$minitor" -i  -l 15  -fn "Terminus 14" -nf "#ffffff" -b  -nb "#000000" -sf "#000000" -sb "#6CA98A")
+	dmenu_cmd=(dmenu-niri)
 fi
 
 password=$(printf '%s\n' "${password_files[@]}" | "${dmenu_cmd[@]}" "$@")
