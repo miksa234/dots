@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+mon_n="BOE 0x0BCA Unknown"
+mon_l="PNP(BNQ) BenQ GL2760 H3E04203019"
+mon_r="PNP(BNQ) BenQ GL2760 SCF04101019"
+
+active_connection() {
+    count=$(niri msg outputs | grep -E "H3E04203019|SCF04101019" | wc -l | tr -d ' ')
+    [ "$count" -eq 2 ]
+}
+
+if active_connection; then
+    niri msg output "$mon_l" on && \
+    niri msg output "$mon_r" on && \
+else [ "$MONITOR_OUT" -eq 0 ]; then
+    niri msg output "$mon_n" on && \
+fi

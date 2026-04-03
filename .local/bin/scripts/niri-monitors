@@ -20,11 +20,11 @@ move_workspaces() {
 
 mulmon_activate() {
     noctalia-shell kill && \
-    niri msg output "$mon_l" on
-    niri msg output "$mon_r" on
-    move_workspaces "$mon_l" "l"
-    move_workspaces "$mon_r" "r"
-    niri msg output "$mon_n" off
+    niri msg output "$mon_l" on && \
+    niri msg output "$mon_r" on && \
+    move_workspaces "$mon_l" "l" && \
+    move_workspaces "$mon_r" "r" && \
+    niri msg output "$mon_n" off && \
     noctalia-shell &
     MONITOR_OUT=1
     export MONITOR_OUT
@@ -32,9 +32,9 @@ mulmon_activate() {
 
 mulmon_deactivate() {
     noctalia-shell kill && \
-    niri msg output "$mon_n" on
-    move_workspaces "$mon_n" "l"
-    move_workspaces "$mon_n" "r"
+    niri msg output "$mon_n" on && \
+    move_workspaces "$mon_n" "l" && \
+    move_workspaces "$mon_n" "r" && \
     niri msg output "$mon_l" off
     niri msg output "$mon_r" off
     noctalia-shell &
