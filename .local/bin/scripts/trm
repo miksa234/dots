@@ -1,6 +1,18 @@
 #!/usr/bin/env zsh
 
 
+is_wayland() {
+    [[ -n "${WAYLAND_DISPLAY:-}" ]] || [[ "${XDG_SESSION_TYPE:-}" == "wayland" ]]
+}
+
+run_dmenu() {
+    if is_wayland; then
+        dmenu-niri "$@"
+    else
+        dmenu "$@"
+    fi
+}
+
 stop() {
 #    vpn stop
 	pgrep transmission | xargs kill -9
@@ -11,7 +23,7 @@ finish() {
 	# notifies me when torrent finished downloading and then remove it so it doenst seed
 
 	file=$(transmission-remote -l | grep 100% | awk '{printf $10}')
-	confirm=$(printf "yes\nno" | dmenu -p "Remove Torrent $file ?" )
+	confirm=$(printf "yes\nno" | run_dmenu -p "Remove Torrent $file ?" )
 	if [[ $confirm == "yes" ]]; then
 		transmission-remote -l |\
 			awk '$2 == "100%"{ system("transmission-remote -t " $1 " --remove") }' &&\
@@ -39,9 +51,9 @@ restart() {
 }
 
 magnet() {
-	LINK="$1"
+	MAGNET="$1"
 
-	if [ -z "$LINK" ]; then
+	if [ -z "$MAGNET" ]; then
 	  notify-send "Error" "need magnet link"
 	fi
 
@@ -49,13 +61,14 @@ magnet() {
 	PORT="9091"
 
 	ss -tuna | grep 9091 || trm start &&\
-	confirm=$(printf "yes\nno" | dmenu -p "Add torrent?" )
+    torrent_name=$(echo "$MAGNET" | perl -nE '/dn=([^&]+)/ && do { $n=$1; $n =~ s/%([0-9a-fA-F]{2})/chr(hex($1))/eg; say $n }')
+	confirm=$(printf "yes\nno" | run_dmenu -p "Add torrent ${torrent_name}?" )
 
 	if [[ $confirm == "yes" ]]; then
 			SESSID=$(curl "http://$HOST:$PORT/transmission/rpc" | sed 's/.*<code>//g;s/<\/code>.*//g')
 			add=$(curl --silent --header "$SESSID" \
 						"http://$HOST:$PORT/transmission/rpc"\
-						-d "{\"method\":\"torrent-add\",\"arguments\":{\"filename\":\"${LINK}\"}}")
+						-d "{\"method\":\"torrent-add\",\"arguments\":{\"filename\":\"${MAGNET}\"}}")
 
 			name=$(echo $add | jq -r '.arguments[].name') &&\
 			notify-send  "Succsess File" "$name downloading" ||\
