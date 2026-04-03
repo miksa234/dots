@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 
 mon_n="BOE 0x0BCA Unknown"
 mon_l="PNP(BNQ) BenQ GL2760 H3E04203019"
@@ -11,7 +11,7 @@ active_connection() {
 
 if active_connection; then
     niri msg output "$mon_l" on && \
-    niri msg output "$mon_r" on && \
-else [ "$MONITOR_OUT" -eq 0 ]; then
-    niri msg output "$mon_n" on && \
+    niri msg output "$mon_r" on
+else
+    niri msg output "$mon_n" on
 fi
