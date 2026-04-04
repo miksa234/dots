@@ -16,6 +16,13 @@ move_workspaces() {
             --reference "${direction}${nw}" \
             "$monitor"
     done
+
+    for nw in $(seq 1 9); do
+        niri msg action \
+            move-workspace-to-index \
+            --reference "${direction}${nw}" \
+            ${nw}
+    done
 }
 
 mulmon_activate() {
@@ -33,8 +40,8 @@ mulmon_activate() {
 mulmon_deactivate() {
     noctalia-shell kill && \
     niri msg output "$mon_n" on && \
-    move_workspaces "$mon_n" "l" && \
     move_workspaces "$mon_n" "r" && \
+    move_workspaces "$mon_n" "l" && \
     niri msg output "$mon_l" off
     niri msg output "$mon_r" off
     noctalia-shell &
