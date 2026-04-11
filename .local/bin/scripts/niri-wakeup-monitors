@@ -1,4 +1,4 @@
-#!/usr/sh
+#!/usr/bin/env sh
 
 mon_n="BOE 0x0BCA Unknown"
 mon_l="PNP(BNQ) BenQ GL2760 H3E04203019"
@@ -49,7 +49,7 @@ mulmon_deactivate() {
 
 
 if active_connection; then
-    monitor_activate
+    mulmon_activate
 else
-    monitor_deactivate
+    mulmon_deactivate
 fi
