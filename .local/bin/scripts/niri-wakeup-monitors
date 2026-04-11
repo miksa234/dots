@@ -1,4 +1,4 @@
-#!/usr/bin/env zsh
+#!/usr/sh
 
 mon_n="BOE 0x0BCA Unknown"
 mon_l="PNP(BNQ) BenQ GL2760 H3E04203019"
@@ -9,9 +9,47 @@ active_connection() {
     [ "$count" -eq 2 ]
 }
 
-if active_connection; then
-    niri msg output "$mon_l" on && \
+move_workspaces() {
+    monitor=$1
+    direction=$2
+
+    for nw in $(seq 1 9); do
+        niri msg action \
+            move-workspace-to-monitor \
+            --reference "${direction}${nw}" \
+            "$monitor"
+    done
+
+    niri msg action focus-monitor "$monitor"
+
+    for nw in $(seq 1 9); do
+        niri msg action \
+            move-workspace-to-index \
+            --reference "${direction}${nw}" \
+            "${nw}"
+    done
+
+}
+
+mulmon_activate() {
+    niri msg output "$mon_l" on
     niri msg output "$mon_r" on
-else
+    move_workspaces "$mon_l" "l"
+    move_workspaces "$mon_r" "r"
+    niri msg output "$mon_n" off
+}
+
+mulmon_deactivate() {
     niri msg output "$mon_n" on
+    move_workspaces "$mon_n" "r"
+    move_workspaces "$mon_n" "l"
+    niri msg output "$mon_l" off
+    niri msg output "$mon_r" off
+}
+
+
+if active_connection; then
+    monitor_activate
+else
+    monitor_deactivate
 fi
