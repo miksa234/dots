@@ -1,0 +1,3 @@
+#!/bin/sh
+
+OpenSubtitlesDownload.py -u $(pass osd_user-xyz) -p $(pass osd_pass-xyz)
