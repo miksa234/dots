@@ -1,6 +1,6 @@
 # vim: filetype=neomuttrc
-# muttrc file for account milutin@ponnect.rs
-set realname = "Ponnect"
+# muttrc file for account milutin@oari.io
+set realname = "Milutin Poppovic"
 set from = "milutin@oari.io"
 set status_format = "milutin@oari.io"
 set sendmail = "msmtp -a milutin@oari.io"
