@@ -1,0 +1,5 @@
+#!/bin/sh
+
+minitor=$(niri msg focused-output | grep Output | sed 's/.*(\(.*\)).*/\1/')
+
+dmenu-wl -m "$minitor" -i "$@"

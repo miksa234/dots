@@ -1,0 +1,32 @@
+#!/bin/sh
+
+weather=$HOME/.local/share/status/weather
+
+getforcast() {
+    curl -sf wttr.in/$(curl ipinfo.io/loc) > $weather || exit 1;
+}
+
+showweather() {
+    printf "%s" "$(sed '16q;d' $weather |
+        grep -wo "[0-9]*%" |\
+        sort -rn | sed "s/^/☔:/g;1q" | tr -d '\n')"
+    sed '13q;d' $weather |\
+        grep -o "m\\([-+]\\)*[0-9]\\+" |\
+        sort -n -t 'm' -k 2n |\
+        sed -e 1b -e '$!d' |\
+        tr '\n|m' ' ' |\
+        awk '{print "  :" $2"("$1")" "°"}' ;
+}
+
+case $BLOCK_BUTTON in
+    1) setsid -f "$TERMINAL" -e less -Srf "$weather" ;;
+    3) getforcast && showweather ; pkill -RTMIN+2 dwmblocks ;;
+    6) "$TERMINAL" -e "$EDITOR" "$0" ;;
+esac
+
+
+[ "$(stat -c %y $weather 2>/dev/null | cut -d' ' -f1)" = "$(date '+%Y-%m-%d')" ] ||
+	getforcast
+showweather
+
+"$@"

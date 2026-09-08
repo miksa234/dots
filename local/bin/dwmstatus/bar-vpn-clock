@@ -1,0 +1,5 @@
+#!/bin/sh
+
+[[ -n $(cat $XDG_CACHE_HOME/status/vpn_tz)  ]] &&\
+    TZ=$(cat $XDG_CACHE_HOME/status/vpn_tz) date +"%R:%S "
+

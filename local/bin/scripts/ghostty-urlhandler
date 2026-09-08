@@ -1,0 +1,14 @@
+#!/bin/sh
+
+urlregex='(((http|https|gopher|gemini|ftp|ftps|git)://|www\.)[a-zA-Z0-9.]*[:]?[a-zA-Z0-9./@$&%?$#=_-~]*)|((magnet:\?xt=urn:btih:)[a-zA-Z0-9]*)'
+
+urls="$(wl-paste | sed 's/.*│//g' | tr -d '\n' |
+	grep -aEo "$urlregex" |
+	uniq |
+	sed 's/^www./http:\/\/www\./g')"
+
+[ -z "$urls" ] && exit
+
+chosen="$(echo "$urls" | dmenu-wl -i -p 'Follow which URL?' -l 10 -fn 'Terminus 14' -nb '#000000' -nf '#EEEEEE' -sb '#6CA98A' -sf '#000000')"
+
+[ -n "$chosen" ] && setsid xdg-open "$chosen" >/dev/null 2>&1 &

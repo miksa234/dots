@@ -1,0 +1,12 @@
+#!/bin/sh
+
+mem=$(free -m | grep 'Mem:' | awk '{printf "%.1f G", $3/1000}')
+
+echo -n " :$mem"
+
+case $BLOCK_BUTTON in
+	1) setsid "$TERMINAL" -e sudo htop ;;
+	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
+esac
+
+

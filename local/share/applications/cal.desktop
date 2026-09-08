@@ -1,0 +1,4 @@
+[Desktop Entry]
+Type=Application
+Name=Calendar
+Exec=st -e calcurse -i %u

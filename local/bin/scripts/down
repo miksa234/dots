@@ -1,0 +1,4 @@
+#!/bin/sh
+
+pgrep $1 | xargs kill -9
+

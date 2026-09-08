@@ -1,0 +1,6 @@
+#!/bin/sh
+tmux new-session -d -s dev
+tmux new-window -t dev
+tmux new-window -t dev
+tmux a
+

@@ -1,0 +1,19 @@
+#!/bin/sh
+
+response=$(wget -4 --server-response --max-redirect=0 popovic.xyz:80)
+
+if [[ $response == *"Connection refused"* ]]
+	then
+		emoji="" > $XDG_DATA_HOME/status/server-status.info
+	else
+		emoji="" > $XDG_DATA_HOME/status/server-status.info
+fi
+
+echo ":$emoji"
+
+case $BLOCK_BUTTON in
+    1) nextcloud ;;
+	3) setsid -f "$TERMINAL" -e ssh server;;
+	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
+esac
+

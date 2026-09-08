@@ -1,0 +1,6 @@
+[Desktop Entry]
+Name=transmissionRemoteMagnet
+Type=Application
+Exec=trm magnet %u
+NoDisplay=true
+MimeType=x-scheme-handler/magnet;

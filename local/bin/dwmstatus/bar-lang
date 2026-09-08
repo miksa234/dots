@@ -1,0 +1,8 @@
+#!/bin/sh
+
+echo $(xkblayout-state print %s | awk '{print toupper($0)}')
+
+case $BLOCK_BUTTON in
+	1) xdotool key Shift_L+Shift_R ;  pkill -RTMIN+11 dwmblocks ;;
+	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
+esac

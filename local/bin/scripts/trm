@@ -1,0 +1,79 @@
+#!/usr/bin/env zsh
+
+
+is_wayland() {
+    [[ -n "${WAYLAND_DISPLAY:-}" ]] || [[ "${XDG_SESSION_TYPE:-}" == "wayland" ]]
+}
+
+run_dmenu() {
+    if is_wayland; then
+        dmenu-niri "$@"
+    else
+        dmenu "$@"
+    fi
+}
+
+stop() {
+#    vpn stop
+	pgrep transmission | xargs kill -9
+	notify-send "Transmission" "Stopped"
+}
+
+finish() {
+	# notifies me when torrent finished downloading and then remove it so it doenst seed
+
+	file=$(transmission-remote -l | grep 100% | awk '{printf $10}')
+	confirm=$(printf "yes\nno" | run_dmenu -p "Remove Torrent $file ?" )
+	if [[ $confirm == "yes" ]]; then
+		transmission-remote -l |\
+			awk '$2 == "100%"{ system("transmission-remote -t " $1 " --remove") }' &&\
+			notify-send "Torrent finished downloading" "$file"
+	fi
+
+}
+
+start() {
+    transmission-daemon -g /home/mika/.config/transmission-daemon/ --foreground --log-level=info 2>&1 |\
+    while read line; do
+            echo $line |\
+                grep -v "announcer.c:\|platform.c:\|announce done (tr-dht.c:" |\
+                grep -v "Saved.*variant.c:" |\
+                while read line; do
+                    echo $line | grep -qi "Serving RPC and Web requests" &&\
+                    notify-send "Transmission Started" " "
+                done 2>&1 > /dev/null
+        done&disown;
+        exit 0
+}
+
+restart() {
+	trm stop && trm start
+}
+
+magnet() {
+	MAGNET="$1"
+
+	if [ -z "$MAGNET" ]; then
+	  notify-send "Error" "need magnet link"
+	fi
+
+	HOST="localhost"
+	PORT="9091"
+
+	ss -tuna | grep 9091 || trm start &&\
+    torrent_name=$(echo "$MAGNET" | perl -nE '/dn=([^&]+)/ && do { $n=$1; $n =~ s/%([0-9a-fA-F]{2})/chr(hex($1))/eg; say $n }')
+	confirm=$(printf "yes\nno" | run_dmenu -p "Add torrent ${torrent_name}?" )
+
+	if [[ $confirm == "yes" ]]; then
+			SESSID=$(curl "http://$HOST:$PORT/transmission/rpc" | sed 's/.*<code>//g;s/<\/code>.*//g')
+			add=$(curl --silent --header "$SESSID" \
+						"http://$HOST:$PORT/transmission/rpc"\
+						-d "{\"method\":\"torrent-add\",\"arguments\":{\"filename\":\"${MAGNET}\"}}")
+
+			name=$(echo $add | jq -r '.arguments[].name') &&\
+			notify-send  "Succsess File" "$name downloading" ||\
+			notify-send  "Error" "something went wrong"
+	fi
+}
+
+"$@"

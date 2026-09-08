@@ -1,0 +1,5 @@
+#!/bin/sh
+
+tar c "$1" | pv | tar x -C "$2"
+
+"$@"

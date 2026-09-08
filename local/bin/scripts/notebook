@@ -1,0 +1,24 @@
+#!/bin/sh
+
+start() {
+    tmux new-session -d -s jupyter_sesh 'jupyter notebook --ip=0.0.0.0 --port=8080'
+}
+
+stop(){
+    tmux kill-session -t jupyter_sesh
+}
+
+status(){
+    if pgrep jupyter > /dev/null
+        then echo "Running"
+    else echo "Not Running"
+    fi
+}
+
+restart() {
+    tmux kill-session -t jupyter_sesh && sleep 3 &&\
+        tmux new-session -d -s jupyter_sesh 'jupyter notebook --ip=0.0.0.0 --port=8080'
+
+}
+
+"$@"

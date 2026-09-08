@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+
+notify() {
+    notify-send "VPN" "$1"
+}
+
+start() {
+    connection=$1
+
+    if nmcli connection up "wg0-${connection}"; then
+        notify "$connection started"
+    else
+        notify "$connection failed to start"
+        return 1
+    fi
+}
+
+stop() {
+    running_wg0=$(sudo wg show interfaces | awk '$1 ~ /^wg0-/ { print $1; exit }')
+
+    if [ -n "$running_wg0" ]; then
+        if nmcli connection down "$running_wg0"; then
+            notify "$running_wg0 stopped"
+        fi
+    fi
+
+}
+
+ip() {
+    ipv4=$(curl -4 --silent --fail ip.me)
+    ipv6=$(curl -6 --silent --fail ip.me)
+
+    notify-send "IP" "IPv4: $ipv4
+IPv6: $ipv6"
+}
+
+"$@"
